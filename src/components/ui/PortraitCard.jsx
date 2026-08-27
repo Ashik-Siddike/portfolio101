@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
-import { Sparkles, Compass, Cpu, Activity, Code, Award, CheckCircle, Play, RotateCcw, Video, Image as ImageIcon } from 'lucide-react';
+import { Sparkles, RotateCcw, Video, Image as ImageIcon } from 'lucide-react';
 
 export default function PortraitCard() {
   const cardRef = useRef(null);
@@ -16,8 +16,8 @@ export default function PortraitCard() {
   const mouseYSpring = useSpring(y, { damping: 20, stiffness: 200 });
 
   // 3D Tilt rotations
-  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ['14deg', '-14deg']);
-  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ['-14deg', '14deg']);
+  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ['10deg', '-10deg']);
+  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ['-10deg', '10deg']);
 
   const handleMouseMove = (e) => {
     if (!cardRef.current) return;
@@ -60,7 +60,7 @@ export default function PortraitCard() {
 
   return (
     <div
-      className="relative flex items-center justify-center p-4"
+      className="relative flex items-center justify-center p-2 sm:p-4"
       style={{ perspective: 1200 }}
     >
       <motion.div
@@ -75,7 +75,7 @@ export default function PortraitCard() {
         }}
         data-cursor="view"
         data-cursor-text="ASHIK"
-        className="relative h-[520px] w-[340px] sm:h-[580px] sm:w-[380px] md:h-[620px] md:w-[430px] rounded-3xl p-3 glass-panel group transition-shadow duration-500 hover:shadow-[0_0_50px_rgba(0,245,212,0.3)] border border-slate-700/60"
+        className="relative h-[460px] w-[300px] sm:h-[500px] sm:w-[340px] md:h-[530px] md:w-[370px] lg:h-[540px] lg:w-[390px] rounded-3xl p-2.5 glass-panel group transition-shadow duration-500 hover:shadow-[0_0_50px_rgba(0,245,212,0.3)] border border-slate-700/60"
       >
         {/* Holographic Glowing Border Accent */}
         <div className="absolute -inset-[1.5px] rounded-3xl bg-gradient-to-tr from-cyber-cyan/50 via-electric-indigo/50 to-neon-purple/50 opacity-40 blur-sm group-hover:opacity-80 transition-opacity duration-700 pointer-events-none" />
@@ -103,7 +103,7 @@ export default function PortraitCard() {
           )}
 
           {/* Futuristic Cyber Gradients & Vignette */}
-          <div className="absolute inset-0 bg-gradient-to-t from-void via-void/35 to-transparent pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-t from-void via-void/30 to-transparent pointer-events-none" />
           <div className="absolute inset-0 bg-gradient-to-tr from-electric-indigo/20 via-transparent to-cyber-cyan/15 mix-blend-color-dodge pointer-events-none" />
 
           {/* Dynamic Laser Scanline on Hover */}
@@ -118,8 +118,8 @@ export default function PortraitCard() {
           />
 
           {/* Top Bar HUD Tech Overlays */}
-          <div className="absolute top-4 left-4 right-4 flex items-center justify-between z-20" style={{ transform: 'translateZ(30px)' }}>
-            <div className="flex items-center gap-2 rounded-full bg-void/85 px-3 py-1.5 backdrop-blur-md border border-white/10 text-[11px] font-mono text-cyber-cyan">
+          <div className="absolute top-3.5 left-3.5 right-3.5 flex items-center justify-between z-20" style={{ transform: 'translateZ(25px)' }}>
+            <div className="flex items-center gap-1.5 rounded-full bg-void/85 px-3 py-1 backdrop-blur-md border border-white/10 text-[10px] font-mono text-cyber-cyan">
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyber-cyan opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-cyber-cyan"></span>
@@ -133,25 +133,25 @@ export default function PortraitCard() {
                 <button
                   onClick={handleReplayVideo}
                   title="Replay Entrance Walk"
-                  className="flex h-7 w-7 items-center justify-center rounded-full bg-void/85 text-cyber-cyan border border-white/10 hover:bg-cyber-cyan hover:text-black transition-colors"
+                  className="flex h-6 w-6 items-center justify-center rounded-full bg-void/85 text-cyber-cyan border border-white/10 hover:bg-cyber-cyan hover:text-black transition-colors"
                 >
-                  <RotateCcw className="h-3 w-3" />
+                  <RotateCcw className="h-2.5 w-2.5" />
                 </button>
               )}
 
               <button
                 onClick={toggleMediaMode}
                 title={mediaMode === 'video' ? 'Switch to Portrait Photo' : 'Switch to Walking Video'}
-                className="flex items-center gap-1 rounded-full bg-void/85 px-2.5 py-1 text-[10px] font-mono text-slate-300 border border-white/10 hover:border-cyber-cyan hover:text-white transition-colors"
+                className="flex items-center gap-1 rounded-full bg-void/85 px-2.5 py-0.5 text-[9px] font-mono text-slate-300 border border-white/10 hover:border-cyber-cyan hover:text-white transition-colors"
               >
                 {mediaMode === 'video' ? (
                   <>
-                    <ImageIcon className="h-3 w-3 text-cyber-cyan" />
+                    <ImageIcon className="h-2.5 w-2.5 text-cyber-cyan" />
                     <span>STILL</span>
                   </>
                 ) : (
                   <>
-                    <Video className="h-3 w-3 text-cyber-cyan" />
+                    <Video className="h-2.5 w-2.5 text-cyber-cyan" />
                     <span>WALK</span>
                   </>
                 )}
@@ -160,7 +160,7 @@ export default function PortraitCard() {
           </div>
 
           {/* HUD Coordinate Grid Lines */}
-          <div className="absolute top-1/2 left-3 flex flex-col gap-1 text-[9px] font-mono text-slate-400/90 pointer-events-none" style={{ transform: 'translateZ(20px)' }}>
+          <div className="absolute top-[42%] left-3 flex flex-col gap-0.5 text-[8.5px] font-mono text-slate-400/90 pointer-events-none" style={{ transform: 'translateZ(15px)' }}>
             <span>LOC: MAGURA, BD</span>
             <span>UNI: LONDON (REMOTE)</span>
             <span className="text-cyber-cyan">CST ENGINEER (7TH SEM)</span>
@@ -168,30 +168,30 @@ export default function PortraitCard() {
 
           {/* Bottom Identity & Metrics Card Floating in 3D Space */}
           <div
-            className="absolute bottom-4 left-4 right-4 rounded-xl p-4 glass-panel border border-white/15 bg-void-card/90"
-            style={{ transform: 'translateZ(45px)' }}
+            className="absolute bottom-3 left-3 right-3 rounded-xl p-3 glass-panel border border-white/15 bg-void-card/90"
+            style={{ transform: 'translateZ(35px)' }}
           >
-            <div className="flex items-center justify-between mb-1.5">
+            <div className="flex items-center justify-between mb-1">
               <div>
-                <h3 className="font-display text-lg font-bold tracking-tight text-white flex items-center gap-1.5">
+                <h3 className="font-display text-base font-bold tracking-tight text-white flex items-center gap-1">
                   MD. ASHIK SIDDIKE
-                  <Sparkles className="h-4 w-4 text-cyber-cyan animate-pulse" />
+                  <Sparkles className="h-3.5 w-3.5 text-cyber-cyan animate-pulse" />
                 </h3>
-                <p className="text-xs text-slate-300 font-mono">Full-Stack Dev & UI/UX Designer</p>
+                <p className="text-[11px] text-slate-300 font-mono">Full-Stack Dev & UI/UX Designer</p>
               </div>
 
               <div className="text-right">
                 <div className="text-xs font-mono font-bold text-cyber-cyan">3+ YRS</div>
-                <div className="text-[10px] text-slate-400 font-mono">Hybrid Edge</div>
+                <div className="text-[9px] text-slate-400 font-mono">Hybrid Edge</div>
               </div>
             </div>
 
             {/* Micro skill tags */}
-            <div className="mt-2.5 flex flex-wrap gap-1.5 pt-2 border-t border-white/10 text-[10px] font-mono text-slate-300">
-              <span className="px-2 py-0.5 rounded-md bg-white/5 border border-white/5">React / Next.js</span>
-              <span className="px-2 py-0.5 rounded-md bg-white/5 border border-white/5">Node / Firebase</span>
-              <span className="px-2 py-0.5 rounded-md bg-cyber-cyan/10 text-cyber-cyan border border-cyber-cyan/20">Figma UI/UX</span>
-              <span className="px-2 py-0.5 rounded-md bg-electric-indigo/20 text-indigo-300 border border-electric-indigo/30">Gemini AI</span>
+            <div className="mt-2 flex flex-wrap gap-1 pt-1.5 border-t border-white/10 text-[9px] font-mono text-slate-300">
+              <span className="px-1.5 py-0.5 rounded-md bg-white/5 border border-white/5">React / Next.js</span>
+              <span className="px-1.5 py-0.5 rounded-md bg-white/5 border border-white/5">Node / Firebase</span>
+              <span className="px-1.5 py-0.5 rounded-md bg-cyber-cyan/10 text-cyber-cyan border border-cyber-cyan/20">Figma UI/UX</span>
+              <span className="px-1.5 py-0.5 rounded-md bg-electric-indigo/20 text-indigo-300 border border-electric-indigo/30">Gemini AI</span>
             </div>
           </div>
         </div>
