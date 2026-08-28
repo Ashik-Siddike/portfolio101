@@ -258,20 +258,38 @@ export const HeroFuturistic = ({
         </div>
       </div>
 
-      {/* Explore / Initialize Action Button */}
+      {/* Animated Cyber Scroll Hint & Action Widget */}
       <button
         onClick={handleScrollClick}
-        className="explore-btn z-30"
-        style={{ animationDelay: '1.8s' }}
+        className="explore-btn z-30 group"
+        style={{ animationDelay: '1.5s' }}
         data-cursor="pointer"
+        data-cursor-text="ENTER"
       >
-        <span>SCROLL TO ENTER WORKSPACE</span>
-        <span className="explore-arrow">
-          <svg width="20" height="20" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg" className="arrow-svg">
-            <path d="M11 5V17" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-            <path d="M6 12L11 17L16 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+        {/* Animated Cyber Mouse Capsule */}
+        <div className="flex h-6 w-4 items-start justify-center rounded-full border border-cyber-cyan/70 p-1">
+          <div className="h-1.5 w-1 rounded-full bg-cyber-cyan shadow-[0_0_8px_#00f5d4] scroll-wheel-dot" />
+        </div>
+
+        {/* Scroll Prompt & Keyboard/Click Hint */}
+        <div className="text-left flex flex-col">
+          <span className="font-mono text-xs font-bold tracking-widest text-white group-hover:text-cyber-cyan transition-colors">
+            SCROLL DOWN TO EXPLORE
+          </span>
+          <span className="font-mono text-[9px] tracking-wider text-slate-400">
+            [ OR CLICK TO ENTER WORKSPACE ]
+          </span>
+        </div>
+
+        {/* Cascading Chevrons */}
+        <div className="flex flex-col items-center justify-center text-cyber-cyan -space-y-1.5 ml-1">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="chevron-anim-1">
+            <polyline points="6 9 12 15 18 9" />
           </svg>
-        </span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="chevron-anim-2">
+            <polyline points="6 9 12 15 18 9" />
+          </svg>
+        </div>
       </button>
 
       {/* 3D WebGPU / Three.js Depth Map Scanner Canvas */}

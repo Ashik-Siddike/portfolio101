@@ -109,12 +109,32 @@
     }
   }
 
-  @keyframes pulseArrow {
+  @keyframes scrollWheel {
+    0% {
+      opacity: 0;
+      transform: translateY(-4px);
+    }
+    30% {
+      opacity: 1;
+    }
+    75% {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(-4px);
+    }
+  }
+
+  @keyframes chevronCascade {
     0%, 100% {
+      opacity: 0.3;
       transform: translateY(0);
     }
     50% {
-      transform: translateY(6px);
+      opacity: 1;
+      transform: translateY(3px);
     }
   }
 
@@ -126,6 +146,17 @@
     animation: heroFadeInSubtitle 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
 
+  .scroll-wheel-dot {
+    animation: scrollWheel 1.8s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+  }
+
+  .chevron-anim-1 {
+    animation: chevronCascade 1.5s infinite ease-in-out;
+  }
+  .chevron-anim-2 {
+    animation: chevronCascade 1.5s infinite ease-in-out 0.25s;
+  }
+
   .explore-btn {
     position: absolute;
     bottom: 36px;
@@ -133,39 +164,24 @@
     transform: translateX(-50%);
     display: flex;
     align-items: center;
-    gap: 12px;
-    padding: 12px 28px;
+    gap: 14px;
+    padding: 10px 24px;
     border-radius: 9999px;
-    background: rgba(13, 14, 23, 0.75);
+    background: rgba(13, 14, 23, 0.85);
     border: 1px solid rgba(0, 245, 212, 0.4);
     color: #ffffff;
     font-family: monospace;
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
     backdrop-filter: blur(12px);
-    box-shadow: 0 0 25px rgba(0, 245, 212, 0.25);
-    transition: all 0.3s ease;
+    box-shadow: 0 0 30px rgba(0, 245, 212, 0.25);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     cursor: pointer;
   }
 
   .explore-btn:hover {
     background: rgba(0, 245, 212, 0.15);
     border-color: #00f5d4;
-    box-shadow: 0 0 35px rgba(0, 245, 212, 0.5);
-    transform: translateX(-50%) scale(1.05);
-  }
-
-  .explore-arrow {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    animation: pulseArrow 1.8s infinite ease-in-out;
-  }
-
-  .arrow-svg {
-    color: #00f5d4;
+    box-shadow: 0 0 40px rgba(0, 245, 212, 0.5);
+    transform: translateX(-50%) translateY(-2px) scale(1.03);
   }
 }
 
