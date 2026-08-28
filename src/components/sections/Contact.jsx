@@ -1,38 +1,10 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Canvas, useFrame } from '@react-three/fiber';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Send, Copy, Check, Sparkles, Mail, Clock, MapPin, ArrowUpRight, MessageSquare, Zap, Terminal, Phone, Globe } from 'lucide-react';
 import confetti from 'canvas-confetti';
-import * as THREE from 'three';
 import MagneticButton from '../ui/MagneticButton';
 import { GithubIcon, LinkedinIcon, WhatsAppIcon } from '../ui/Icons';
 import { KineticTitle, KineticSubtitle } from '../ui/KineticText';
-
-// 3D Wormhole Vortex
-function WormholeVortex() {
-  const meshRef = useRef();
-
-  useFrame((state, delta) => {
-    if (meshRef.current) {
-      meshRef.current.rotation.z += delta * 0.5;
-      meshRef.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.4) * 0.2;
-    }
-  });
-
-  return (
-    <mesh ref={meshRef} position={[0, 0, -2]}>
-      <torusGeometry args={[3.2, 0.9, 32, 100]} />
-      <meshStandardMaterial
-        color="#6366f1"
-        emissive="#00f5d4"
-        emissiveIntensity={0.8}
-        wireframe={true}
-        transparent={true}
-        opacity={0.35}
-      />
-    </mesh>
-  );
-}
 
 export default function Contact() {
   const [copied, setCopied] = useState(false);
@@ -94,20 +66,19 @@ export default function Contact() {
   return (
     <section id="contact" className="relative py-28 px-4 sm:px-6 lg:px-8 bg-void overflow-hidden border-t border-white/5">
       
-      {/* 3D Wormhole Background Canvas */}
-      <div className="absolute inset-0 pointer-events-none opacity-40">
-        <Canvas camera={{ position: [0, 0, 5], fov: 60 }}>
-          <ambientLight intensity={0.5} />
-          <pointLight position={[0, 0, 2]} color="#00f5d4" intensity={3} />
-          <WormholeVortex />
-        </Canvas>
+      {/* Lightweight GPU-Accelerated Cyber Vortex Background (Zero WebGL overhead) */}
+      <div className="absolute inset-0 pointer-events-none opacity-30 flex items-center justify-center overflow-hidden">
+        <div className="absolute h-[600px] w-[600px] rounded-full border border-cyber-cyan/20 animate-[spin_60s_linear_infinite]" />
+        <div className="absolute h-[450px] w-[450px] rounded-full border border-electric-indigo/20 animate-[spin_40s_linear_infinite_reverse]" />
+        <div className="absolute h-[300px] w-[300px] rounded-full border border-neon-purple/20 animate-[spin_25s_linear_infinite]" />
+        <div className="h-96 w-96 rounded-full bg-gradient-to-tr from-cyber-cyan/15 via-electric-indigo/15 to-transparent blur-[120px]" />
       </div>
 
       <motion.div
-        initial={{ opacity: 0, scale: 0.95, y: 30 }}
-        whileInView={{ opacity: 1, scale: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.2 }}
-        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.1 }}
+        transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
         className="relative z-10 mx-auto max-w-7xl"
       >
         
@@ -130,13 +101,7 @@ export default function Contact() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-stretch max-w-6xl mx-auto">
           
           {/* Left Column: Direct Channels & Verified Info */}
-          <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="lg:col-span-5 flex flex-col justify-between p-8 sm:p-10 rounded-3xl glass-panel border border-white/15 space-y-8 bg-void-card/80 shadow-[0_20px_60px_rgba(0,0,0,0.8)]"
-          >
+          <div className="lg:col-span-5 flex flex-col justify-between p-8 sm:p-10 rounded-3xl glass-panel border border-white/15 space-y-8 bg-void-card/80 shadow-[0_20px_60px_rgba(0,0,0,0.8)]">
             <div>
               <h3 className="font-display font-bold text-2xl text-white mb-2">
                 DIRECT CONTACT
@@ -239,16 +204,10 @@ export default function Contact() {
                 ))}
               </div>
             </div>
-          </motion.div>
+          </div>
 
           {/* Right Column: Project Inquiry Form */}
-          <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="lg:col-span-7 p-8 sm:p-10 rounded-3xl glass-panel border border-white/15 bg-void-card/80 shadow-[0_20px_60px_rgba(0,0,0,0.8)]"
-          >
+          <div className="lg:col-span-7 p-8 sm:p-10 rounded-3xl glass-panel border border-white/15 bg-void-card/80 shadow-[0_20px_60px_rgba(0,0,0,0.8)]">
             <AnimatePresence mode="wait">
               {!formSubmitted ? (
                 <motion.form
@@ -366,7 +325,7 @@ export default function Contact() {
                 </motion.div>
               )}
             </AnimatePresence>
-          </motion.div>
+          </div>
 
         </div>
 

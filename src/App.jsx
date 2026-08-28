@@ -1,48 +1,49 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, lazy, Suspense } from 'react';
 import Lenis from 'lenis';
 import Preloader from './components/layout/Preloader';
 import Navbar from './components/layout/Navbar';
 import CustomCursor from './components/ui/CustomCursor';
 import Hero from './components/sections/Hero';
-import Showreel from './components/sections/Showreel';
-import Projects from './components/sections/Projects';
-import Lab from './components/sections/Lab';
-import Philosophy from './components/sections/Philosophy';
-import Metrics from './components/sections/Metrics';
-import Contact from './components/sections/Contact';
+
+// Code-split below-the-fold heavy sections for instant initial loading on Vercel
+const Showreel = lazy(() => import('./components/sections/Showreel'));
+const Projects = lazy(() => import('./components/sections/Projects'));
+const Lab = lazy(() => import('./components/sections/Lab'));
+const Philosophy = lazy(() => import('./components/sections/Philosophy'));
+const Metrics = lazy(() => import('./components/sections/Metrics'));
+const Contact = lazy(() => import('./components/sections/Contact'));
 
 export default function App() {
   const [loading, setLoading] = useState(true);
 
-  // Initialize smooth momentum scroll with Lenis
+  // Initialize smooth momentum scroll with Lenis (Optimized performance settings)
   useEffect(() => {
     const lenis = new Lenis({
-      duration: 1.2,
+      duration: 1.0,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: 'vertical',
       gestureOrientation: 'vertical',
       smoothWheel: true,
-      wheelMultiplier: 1.1,
+      wheelMultiplier: 1.0,
     });
 
+    let rafId;
     function raf(time) {
       lenis.raf(time);
-      requestAnimationFrame(raf);
+      rafId = requestAnimationFrame(raf);
     }
 
-    requestAnimationFrame(raf);
+    rafId = requestAnimationFrame(raf);
 
     return () => {
+      cancelAnimationFrame(rafId);
       lenis.destroy();
     };
   }, []);
 
   return (
     <div className="relative min-h-screen bg-void text-slate-100 overflow-x-hidden selection:bg-cyber-cyan selection:text-black">
-      {/* Film grain noise overlay */}
-      <div className="fixed inset-0 pointer-events-none z-40 bg-noise" />
-
-      {/* Custom Spring Physics Magnetic Cursor */}
+      {/* Zero-Rerender Hardware Accelerated Fluid Cursor */}
       <CustomCursor />
 
       {/* Developer CLI Bootloader */}
@@ -60,12 +61,14 @@ export default function App() {
       {/* Main Content Sections */}
       <main className="relative z-10">
         <Hero />
-        <Showreel />
-        <Projects />
-        <Lab />
-        <Philosophy />
-        <Metrics />
-        <Contact />
+        <Suspense fallback={<div className="py-20 text-center font-mono text-xs text-cyber-cyan">LOADING MODULE...</div>}>
+          <Showreel />
+          <Projects />
+          <Lab />
+          <Philosophy />
+          <Metrics />
+          <Contact />
+        </Suspense>
       </main>
     </div>
   );

@@ -1,10 +1,10 @@
 import React, { useRef, useMemo } from 'react';
-import { Canvas, useFrame, useLoader } from '@react-three/fiber';
-import { Float, MeshDistortMaterial, Sphere, Torus, Octahedron, Text, Points, PointMaterial } from '@react-three/drei';
+import { Canvas, useFrame } from '@react-three/fiber';
+import { Float, Points, PointMaterial } from '@react-three/drei';
 import * as THREE from 'three';
 
-// 3D Star Particle Field
-function ParticleField({ count = 1200 }) {
+// Optimized 3D Star Particle Field
+function ParticleField({ count = 600 }) {
   const pointsRef = useRef();
 
   const [positions, colors] = useMemo(() => {
@@ -15,9 +15,9 @@ function ParticleField({ count = 1200 }) {
     const colorC = new THREE.Color('#ffffff'); // White
 
     for (let i = 0; i < count; i++) {
-      pos[i * 3] = (Math.random() - 0.5) * 25;
-      pos[i * 3 + 1] = (Math.random() - 0.5) * 25;
-      pos[i * 3 + 2] = (Math.random() - 0.5) * 20 - 2;
+      pos[i * 3] = (Math.random() - 0.5) * 24;
+      pos[i * 3 + 1] = (Math.random() - 0.5) * 24;
+      pos[i * 3 + 2] = (Math.random() - 0.5) * 16 - 2;
 
       const mixed = Math.random();
       const c = mixed < 0.4 ? colorA : mixed < 0.8 ? colorB : colorC;
@@ -30,8 +30,8 @@ function ParticleField({ count = 1200 }) {
 
   useFrame((state, delta) => {
     if (pointsRef.current) {
-      pointsRef.current.rotation.y += delta * 0.04;
-      pointsRef.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.2) * 0.05;
+      pointsRef.current.rotation.y += delta * 0.03;
+      pointsRef.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.15) * 0.04;
     }
   });
 
@@ -40,7 +40,7 @@ function ParticleField({ count = 1200 }) {
       <PointMaterial
         transparent
         vertexColors
-        size={0.07}
+        size={0.06}
         sizeAttenuation={true}
         depthWrite={false}
         blending={THREE.AdditiveBlending}
@@ -49,7 +49,7 @@ function ParticleField({ count = 1200 }) {
   );
 }
 
-// Floating Cyber Geometric Artifacts
+// Lightweight Floating Cyber Geometric Artifacts
 function FloatingArtifacts() {
   const torusRef = useRef();
   const octaRef = useRef();
@@ -57,44 +57,41 @@ function FloatingArtifacts() {
   useFrame((state) => {
     const t = state.clock.getElapsedTime();
     if (torusRef.current) {
-      torusRef.current.rotation.x = t * 0.4;
-      torusRef.current.rotation.y = t * 0.6;
+      torusRef.current.rotation.x = t * 0.35;
+      torusRef.current.rotation.y = t * 0.5;
     }
     if (octaRef.current) {
-      octaRef.current.rotation.y = t * 0.5;
-      octaRef.current.rotation.z = t * 0.3;
+      octaRef.current.rotation.y = t * 0.4;
+      octaRef.current.rotation.z = t * 0.25;
     }
   });
 
   return (
     <>
-      <Float speed={2.5} rotationIntensity={1.2} floatIntensity={1.5} position={[-3.8, 1.8, -1]}>
+      <Float speed={2} rotationIntensity={1} floatIntensity={1.2} position={[-3.8, 1.8, -1]}>
         <mesh ref={torusRef}>
-          <torusGeometry args={[0.9, 0.22, 32, 64]} />
+          <torusGeometry args={[0.85, 0.2, 24, 48]} />
           <meshStandardMaterial
             color="#6366f1"
-            roughness={0.1}
-            metalness={0.9}
+            roughness={0.2}
+            metalness={0.8}
             emissive="#4338ca"
-            emissiveIntensity={0.6}
+            emissiveIntensity={0.5}
             wireframe={true}
           />
         </mesh>
       </Float>
 
-      <Float speed={3.2} rotationIntensity={1.8} floatIntensity={2} position={[3.6, -1.6, 0.5]}>
+      <Float speed={2.5} rotationIntensity={1.2} floatIntensity={1.4} position={[3.6, -1.6, 0.5]}>
         <mesh ref={octaRef}>
-          <octahedronGeometry args={[0.9, 0]} />
-          <meshPhysicalMaterial
+          <octahedronGeometry args={[0.85, 0]} />
+          <meshStandardMaterial
             color="#00f5d4"
-            roughness={0.15}
-            metalness={0.8}
-            transmission={0.6}
-            ior={1.5}
-            reflectivity={0.9}
-            clearcoat={1}
+            roughness={0.2}
+            metalness={0.85}
             emissive="#00f5d4"
-            emissiveIntensity={0.3}
+            emissiveIntensity={0.4}
+            wireframe={true}
           />
         </mesh>
       </Float>
@@ -102,21 +99,21 @@ function FloatingArtifacts() {
   );
 }
 
-// Core Hero 3D Scene Wrapper
+// Core Hero 3D Scene Wrapper (Optimized DPR & Materials)
 export default function HeroScene() {
   return (
     <div className="absolute inset-0 pointer-events-none z-0">
       <Canvas
         camera={{ position: [0, 0, 7], fov: 45 }}
-        gl={{ antialias: true, alpha: true }}
-        dpr={[1, 2]}
+        gl={{ antialias: false, alpha: true, powerPreference: 'high-performance' }}
+        dpr={[1, 1.5]}
       >
         <ambientLight intensity={0.4} />
-        <directionalLight position={[10, 10, 5]} intensity={1.5} color="#ffffff" />
-        <pointLight position={[-6, -4, 2]} intensity={2.5} color="#00f5d4" />
-        <pointLight position={[6, 4, 3]} intensity={3} color="#6366f1" />
+        <directionalLight position={[10, 10, 5]} intensity={1.2} color="#ffffff" />
+        <pointLight position={[-5, -3, 2]} intensity={2} color="#00f5d4" />
+        <pointLight position={[5, 3, 2]} intensity={2} color="#6366f1" />
 
-        <ParticleField count={900} />
+        <ParticleField count={600} />
         <FloatingArtifacts />
       </Canvas>
     </div>

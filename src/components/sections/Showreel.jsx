@@ -1,5 +1,5 @@
-import React, { useState, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useState, useRef, useEffect } from 'react';
+import { motion } from 'framer-motion';
 import { Player } from '@remotion/player';
 import { Film, Zap } from 'lucide-react';
 import CinematicShowreel from '../../remotion/CinematicShowreel';
@@ -10,6 +10,8 @@ import { KineticTitle, KineticSubtitle } from '../ui/KineticText';
 
 export default function Showreel() {
   const [activeTab, setActiveTab] = useState(0);
+  const [isInViewport, setIsInViewport] = useState(false);
+  const containerRef = useRef(null);
   const playerRef = useRef(null);
 
   const compositions = [
@@ -65,24 +67,38 @@ export default function Showreel() {
 
   const currentComp = compositions[activeTab];
 
+  // Pause Remotion rendering loop when scrolled out of viewport
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsInViewport(entry.isIntersecting);
+      },
+      { threshold: 0.1 }
+    );
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
   const handleTabChange = (idx) => {
     setActiveTab(idx);
   };
 
   return (
-    <section id="showreel" className="relative py-28 px-4 sm:px-6 lg:px-8 bg-void border-t border-white/5 overflow-hidden">
-      
+    <section ref={containerRef} id="showreel" className="relative py-28 px-4 sm:px-6 lg:px-8 bg-void border-t border-white/5 overflow-hidden">
       {/* Background ambient lighting pulse */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[500px] w-[800px] rounded-full bg-electric-indigo/10 blur-[160px] pointer-events-none" />
 
       <motion.div
-        initial={{ opacity: 0, y: 40 }}
+        initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.15 }}
+        viewport={{ once: true, amount: 0.1 }}
         transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
         className="mx-auto max-w-7xl relative z-10"
       >
-        
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
           <div>
@@ -125,25 +141,35 @@ export default function Showreel() {
 
         {/* Remotion Player Container */}
         <div className="relative rounded-3xl overflow-hidden glass-panel border border-white/15 shadow-[0_30px_90px_rgba(0,0,0,0.9)] aspect-video w-full group">
-          
-          {/* Remotion Live Video Player */}
-          <Player
-            key={currentComp.id}
-            ref={playerRef}
-            component={currentComp.component}
-            durationInFrames={currentComp.durationInFrames}
-            compositionWidth={1920}
-            compositionHeight={1080}
-            fps={30}
-            style={{
-              width: '100%',
-              height: '100%',
-            }}
-            controls
-            autoPlay
-            loop
-            acknowledgeRemotionLicense
-          />
+          {/* Remotion Live Video Player (Plays only when in view) */}
+          {isInViewport && (
+            <Player
+              key={currentComp.id}
+              ref={playerRef}
+              component={currentComp.component}
+              durationInFrames={currentComp.durationInFrames}
+              compositionWidth={1920}
+              compositionHeight={1080}
+              fps={30}
+              style={{
+                width: '100%',
+                height: '100%',
+              }}
+              controls
+              autoPlay
+              loop
+              acknowledgeRemotionLicense
+            />
+          )}
+
+          {/* Fallback Poster when out of view */}
+          {!isInViewport && (
+            <div className="h-full w-full flex items-center justify-center bg-void-card">
+              <div className="font-mono text-xs text-cyber-cyan animate-pulse">
+                INITIALIZING REMOTION ENGINE...
+              </div>
+            </div>
+          )}
 
           {/* CRT Scanline Effect */}
           <div className="crt-overlay pointer-events-none" />
@@ -184,7 +210,6 @@ export default function Showreel() {
             ))}
           </div>
         </div>
-
       </motion.div>
     </section>
   );
