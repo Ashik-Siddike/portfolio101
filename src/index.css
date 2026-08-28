@@ -83,6 +83,90 @@
     pointer-events: none;
     opacity: 0.5;
   }
+
+  /* Futuristic Hero Animations */
+  @keyframes heroFadeIn {
+    0% {
+      opacity: 0;
+      transform: translateY(30px) scale(0.95);
+      filter: blur(6px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      filter: blur(0);
+    }
+  }
+
+  @keyframes heroFadeInSubtitle {
+    0% {
+      opacity: 0;
+      transform: translateY(15px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes pulseArrow {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(6px);
+    }
+  }
+
+  .fade-in {
+    animation: heroFadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .fade-in-subtitle {
+    animation: heroFadeInSubtitle 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .explore-btn {
+    position: absolute;
+    bottom: 36px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 28px;
+    border-radius: 9999px;
+    background: rgba(13, 14, 23, 0.75);
+    border: 1px solid rgba(0, 245, 212, 0.4);
+    color: #ffffff;
+    font-family: monospace;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 0 25px rgba(0, 245, 212, 0.25);
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+
+  .explore-btn:hover {
+    background: rgba(0, 245, 212, 0.15);
+    border-color: #00f5d4;
+    box-shadow: 0 0 35px rgba(0, 245, 212, 0.5);
+    transform: translateX(-50%) scale(1.05);
+  }
+
+  .explore-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: pulseArrow 1.8s infinite ease-in-out;
+  }
+
+  .arrow-svg {
+    color: #00f5d4;
+  }
 }
 
 /* Hide native cursor on pointer devices */
