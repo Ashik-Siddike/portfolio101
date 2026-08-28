@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Md. Ashik Siddike - Full-Stack Web Developer & UI/UX Designer Resume</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    @page {
+      size: A4;
+      margin: 12mm 15mm;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      color: #1e293b;
+      background-color: #ffffff;
+      line-height: 1.45;
+      font-size: 9.5pt;
+      -webkit-font-smoothing: antialiased;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: #fff;
+    }
+    /* Header */
+    header {
+      border-bottom: 2px solid #0f172a;
+      padding-bottom: 10px;
+      margin-bottom: 12px;
+    }
+    .header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 4px;
+    }
+    h1 {
+      font-size: 20pt;
+      font-weight: 800;
+      color: #0f172a;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+    }
+    .title-badge {
+      font-size: 9.5pt;
+      font-weight: 700;
+      color: #0284c7;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .contact-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 8.5pt;
+      color: #475569;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .contact-bar a {
+      color: #0f172a;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .contact-bar a:hover {
+      text-decoration: underline;
+      color: #0284c7;
+    }
+    /* Summary */
+    .summary {
+      font-size: 9pt;
+      color: #334155;
+      margin-bottom: 12px;
+      line-height: 1.45;
+      text-align: justify;
+    }
+    /* 2 Column Layout */
+    .main-grid {
+      display: grid;
+      grid-template-columns: 62% 35%;
+      gap: 20px;
+    }
+    /* Section Headings */
+    h2 {
+      font-size: 10.5pt;
+      font-weight: 800;
+      color: #0f172a;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border-bottom: 1.5px solid #cbd5e1;
+      padding-bottom: 3px;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .section-block {
+      margin-bottom: 12px;
+    }
+    /* Experience & Projects */
+    .item {
+      margin-bottom: 9px;
+    }
+    .item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 2px;
+    }
+    .item-title {
+      font-size: 9.5pt;
+      font-weight: 700;
+      color: #0f172a;
+    }
+    .item-company {
+      font-size: 8.5pt;
+      font-weight: 600;
+      color: #0284c7;
+    }
+    .item-date {
+      font-size: 8pt;
+      font-family: 'JetBrains Mono', monospace;
+      color: #64748b;
+      font-weight: 500;
+      text-align: right;
+    }
+    .item-tech {
+      font-size: 8pt;
+      font-family: 'JetBrains Mono', monospace;
+      color: #0f172a;
+      background: #f1f5f9;
+      padding: 1px 5px;
+      border-radius: 3px;
+      display: inline-block;
+      margin-top: 2px;
+      margin-bottom: 3px;
+      font-weight: 600;
+    }
+    ul {
+      list-style-type: none;
+      padding-left: 0;
+    }
+    li {
+      position: relative;
+      padding-left: 12px;
+      font-size: 8.5pt;
+      color: #334155;
+      margin-bottom: 3px;
+      line-height: 1.38;
+    }
+    li::before {
+      content: "▪";
+      position: absolute;
+      left: 0;
+      color: #0284c7;
+      font-size: 10pt;
+      line-height: 1;
+    }
+    /* Skills Groups */
+    .skill-group {
+      margin-bottom: 7px;
+    }
+    .skill-title {
+      font-size: 8.5pt;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 1px;
+    }
+    .skill-list {
+      font-size: 8pt;
+      color: #334155;
+      line-height: 1.35;
+    }
+    /* Education & Certifications */
+    .edu-item {
+      margin-bottom: 6px;
+    }
+    .edu-degree {
+      font-size: 8.5pt;
+      font-weight: 700;
+      color: #0f172a;
+    }
+    .edu-school {
+      font-size: 8pt;
+      color: #475569;
+    }
+    .edu-meta {
+      font-size: 7.5pt;
+      font-family: 'JetBrains Mono', monospace;
+      color: #64748b;
+    }
+    /* Print Styles */
+    @media print {
+      body {
+        background: #fff;
+        padding: 0;
+      }
+      .no-print {
+        display: none !important;
+      }
+    }
+    .print-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #0f172a;
+      color: #fff;
+      padding: 12px 24px;
+      border-radius: 9999px;
+      font-weight: 700;
+      font-size: 14px;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'Inter', sans-serif;
+      z-index: 100;
+    }
+    .print-btn:hover {
+      background: #0284c7;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Floating Print/PDF Button for Web Preview -->
+  <button class="print-btn no-print" onclick="window.print()">
+    <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+      <path d="M2.5 8a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1z"/>
+      <path d="M5 1a2 2 0 0 0-2 2v2H2a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h1v1a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-1h1a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-1V3a2 2 0 0 0-2-2H5zM4 3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2H4V3zm1 5a.5.5 0 0 0 0 1h6a.5.5 0 0 0 0-1H5zm0 2a.5.5 0 0 0 0 1h6a.5.5 0 0 0 0-1H5z"/>
+    </svg>
+    Save as PDF / Print
+  </button>
+
+  <div class="container">
+    <!-- Header -->
+    <header>
+      <div class="header-top">
+        <div>
+          <h1>Md. Ashik Siddike</h1>
+          <div class="title-badge">Full-Stack Web Developer & UI/UX Designer | Creative Technologist</div>
+        </div>
+      </div>
+      <div class="contact-bar">
+        <span>📍 Magura, Bangladesh (Open to Global Remote)</span>
+        <span>✉ <a href="mailto:ashiksiddike@gmail.com">ashiksiddike@gmail.com</a></span>
+        <span>☎ <a href="tel:+8801918766033">+880 1918 766033</a></span>
+        <span>🌐 <a href="https://ashiksiddike.com" target="_blank">ashiksiddike.com</a></span>
+        <span>🐙 <a href="https://github.com/Ashik-Siddike" target="_blank">github.com/Ashik-Siddike</a></span>
+        <span>💼 <a href="https://linkedin.com/in/ashik-siddike" target="_blank">linkedin.com/in/ashik-siddike</a></span>
+      </div>
+    </header>
+
+    <!-- Professional Summary -->
+    <div class="summary">
+      Results-driven <strong>Full-Stack Web Developer & UI/UX Specialist</strong> with 3+ years of commercial experience engineering scalable web applications, AI-driven automation workflows, and high-converting visual branding. Highly proficient in <strong>React.js, Next.js, TypeScript, Node.js, Firebase, Supabase</strong>, and <strong>Google Gemini API</strong> integration. Proven track record of delivering <strong>50+ successful client projects</strong> and building production SaaS systems with sub-second performance, strict security, and modern UI/UX design systems.
+    </div>
+
+    <!-- Main Grid -->
+    <div class="main-grid">
+      
+      <!-- Left Column: Experience & Projects -->
+      <div class="left-col">
+        
+        <!-- Experience -->
+        <div class="section-block">
+          <h2>💼 Professional Experience</h2>
+
+          <!-- Role 1 -->
+          <div class="item">
+            <div class="item-header">
+              <div>
+                <span class="item-title">Support Engineer (Web Dev & Research)</span><br>
+                <span class="item-company">Dr. Sujit Biswas's Team, City, University of London</span>
+              </div>
+              <span class="item-date">May 2025 – Present<br><em>Remote</em></span>
+            </div>
+            <ul>
+              <li>Engineered and maintained accessible, high-performance UI components using <strong>React.js, Next.js</strong>, and <strong>Tailwind CSS</strong> for educational research platforms.</li>
+              <li>Architected backend REST APIs, data validation, and real-time database workflows with <strong>Node.js, Express.js</strong>, and <strong>Firebase Firestore</strong>.</li>
+              <li>Collaborated with international researchers to translate user behavioral data into technical interface mockups and high-fidelity Figma UI prototypes.</li>
+              <li>Authored comprehensive architectural documentation and deployment pipelines for developer onboarding.</li>
+            </ul>
+          </div>
+
+          <!-- Role 2 -->
+          <div class="item">
+            <div class="item-header">
+              <div>
+                <span class="item-title">Freelance Full-Stack Developer & UI/UX Designer</span><br>
+                <span class="item-company">Self-Employed (Global Clients)</span>
+              </div>
+              <span class="item-date">Jan 2023 – Present<br><em>Remote</em></span>
+            </div>
+            <ul>
+              <li>Successfully designed and delivered <strong>50+ complete brand identity, UI/UX, and web development projects</strong> for international online businesses.</li>
+              <li>Constructed component libraries and vector graphic systems utilizing <strong>Figma, Adobe Photoshop, and Illustrator</strong>.</li>
+              <li>Bridged visual aesthetics with technical programming, resulting in superior user retention, fast loading times, and higher conversion rates.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Featured Projects -->
+        <div class="section-block">
+          <h2>🚀 Highlighted Production Projects</h2>
+
+          <!-- Project 1 -->
+          <div class="item">
+            <div class="item-header">
+              <span class="item-title">IntervueAI — AI Mock Interviewer SaaS</span>
+              <span class="item-date">2025 – 2026</span>
+            </div>
+            <div class="item-tech">Next.js • TypeScript • Google Gemini 1.5 Pro • Supabase (Auth/RLS) • Tailwind CSS</div>
+            <ul>
+              <li>Engineered an AI SaaS platform that analyzes uploaded PDF resumes and synthesizes personalized coding, behavioral, and architecture challenges in &lt; 2 seconds.</li>
+              <li>Implemented real-time scoring evaluations, candidate performance metrics, and secure Supabase Row-Level Security (RLS) data isolation.</li>
+            </ul>
+          </div>
+
+          <!-- Project 2 -->
+          <div class="item">
+            <div class="item-header">
+              <span class="item-title">Affiliate Campaign Automation Platform</span>
+              <span class="item-date">2025</span>
+            </div>
+            <div class="item-tech">Next.js • TypeScript • Python (Scraping) • Gemini AI • Vercel</div>
+            <ul>
+              <li>Built an autonomous publishing pipeline generating SEO-optimized product reviews using Python and Gemini AI, boosting organic traffic by +240%.</li>
+              <li>Engineered affiliate link cloaking, secure redirection, and real-time conversion click tracking analytics.</li>
+            </ul>
+          </div>
+
+          <!-- Project 3 -->
+          <div class="item">
+            <div class="item-header">
+              <span class="item-title">247School — Virtual Learning Ecosystem</span>
+              <span class="item-date">2024 – 2025</span>
+            </div>
+            <div class="item-tech">React.js • TypeScript • Tailwind CSS • Firebase (Auth/Firestore)</div>
+            <ul>
+              <li>Constructed a web-based schooling platform at <strong>247school.org</strong> supporting 5,000+ students with virtual classrooms and assignment timelines.</li>
+              <li>Implemented strict multi-role authorization (RBAC) and real-time Firestore database state sync.</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Right Column: Skills, Education, Certs -->
+      <div class="right-col">
+        
+        <!-- Technical Skills -->
+        <div class="section-block">
+          <h2>⚡ Technical Skills</h2>
+          
+          <div class="skill-group">
+            <div class="skill-title">Frontend Architecture:</div>
+            <div class="skill-list">React.js, Next.js (App Router), TypeScript, JavaScript (ES6+), Tailwind CSS, GSAP, HTML5, CSS3, shadcn/ui</div>
+          </div>
+
+          <div class="skill-group">
+            <div class="skill-title">Backend & Cloud:</div>
+            <div class="skill-list">Node.js, Express.js, Firebase (Auth, Firestore, Functions), Supabase (PostgreSQL, RLS), MongoDB, REST APIs, SQL</div>
+          </div>
+
+          <div class="skill-group">
+            <div class="skill-title">AI & Automation:</div>
+            <div class="skill-list">Google Gemini API, LLM Prompt Engineering, Python Automation, Web Scraping, AI Pipelines</div>
+          </div>
+
+          <div class="skill-group">
+            <div class="skill-title">UI/UX & Visual Design:</div>
+            <div class="skill-list">Figma (Design Systems, Auto-Layout), Adobe Photoshop, Adobe Illustrator, Vector Branding, Design Hierarchy</div>
+          </div>
+
+          <div class="skill-group">
+            <div class="skill-title">Tools & Workflows:</div>
+            <div class="skill-list">Git, GitHub, Vercel, VS Code, Chrome DevTools, Postman, Microsoft Teams, Agile/Scrum</div>
+          </div>
+        </div>
+
+        <!-- Education -->
+        <div class="section-block">
+          <h2>🎓 Education</h2>
+          
+          <div class="edu-item">
+            <div class="edu-degree">Diploma in Engineering (CST)</div>
+            <div class="edu-school">Jessore Polytechnic Institute</div>
+            <div class="edu-meta">Jan 2023 – Jan 2027 (7th Sem)</div>
+          </div>
+
+          <div class="edu-item">
+            <div class="edu-degree">SSC (Vocational) - Computer Trade</div>
+            <div class="edu-school">Satkhira Govt. Technical School & College</div>
+            <div class="edu-meta">Graduated: 2022 | GPA: 4.86 / 5.00</div>
+          </div>
+        </div>
+
+        <!-- Certifications & Honors -->
+        <div class="section-block">
+          <h2>🏆 Honors & Certs</h2>
+          
+          <div class="edu-item">
+            <div class="edu-degree">Full-Stack MERN Development</div>
+            <div class="edu-school">Programming Hero Bootcamp</div>
+          </div>
+
+          <div class="edu-item">
+            <div class="edu-degree">Hafeez of the Holy Quran</div>
+            <div class="edu-school">Quranic Academy (Full Memorization)</div>
+          </div>
+
+          <div class="edu-item">
+            <div class="edu-degree">AI Prompt Engineering</div>
+            <div class="edu-school">Applied AI & LLM Systems</div>
+          </div>
+        </div>
+
+        <!-- Languages -->
+        <div class="section-block">
+          <h2>🌐 Languages</h2>
+          <div class="skill-list">
+            <strong>English:</strong> Professional Working<br>
+            <strong>Bengali:</strong> Native Language<br>
+            <strong>Arabic:</strong> Quranic Fluency
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+</body>
+</html>
