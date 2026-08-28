@@ -265,7 +265,7 @@ export const HeroFuturistic = ({
         style={{ animationDelay: '1.8s' }}
         data-cursor="pointer"
       >
-        <span>INITIALIZE WORKSPACE</span>
+        <span>SCROLL TO ENTER WORKSPACE</span>
         <span className="explore-arrow">
           <svg width="20" height="20" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg" className="arrow-svg">
             <path d="M11 5V17" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
