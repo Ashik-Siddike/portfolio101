@@ -34,6 +34,20 @@ export default function PortraitCard() {
     y.set(yPct);
   };
 
+  const handleTouchMove = (e) => {
+    if (!cardRef.current || !e.touches[0]) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    const touch = e.touches[0];
+    const mouseClientX = touch.clientX - rect.left;
+    const mouseClientY = touch.clientY - rect.top;
+
+    const xPct = mouseClientX / rect.width - 0.5;
+    const yPct = mouseClientY / rect.height - 0.5;
+
+    x.set(xPct);
+    y.set(yPct);
+  };
+
   const handleMouseEnter = () => {
     setIsHovered(true);
   };
@@ -60,12 +74,13 @@ export default function PortraitCard() {
 
   return (
     <div
-      className="relative flex items-center justify-center p-2 sm:p-4"
+      className="relative flex items-center justify-center p-2 sm:p-4 w-full"
       style={{ perspective: 1200 }}
     >
       <motion.div
         ref={cardRef}
         onMouseMove={handleMouseMove}
+        onTouchMove={handleTouchMove}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         style={{
@@ -75,7 +90,7 @@ export default function PortraitCard() {
         }}
         data-cursor="view"
         data-cursor-text="ASHIK"
-        className="relative h-[460px] w-[300px] sm:h-[500px] sm:w-[340px] md:h-[530px] md:w-[370px] lg:h-[540px] lg:w-[390px] rounded-3xl p-2.5 glass-panel group transition-shadow duration-500 hover:shadow-[0_0_50px_rgba(0,245,212,0.3)] border border-slate-700/60"
+        className="relative h-[450px] w-full max-w-[310px] sm:max-w-[340px] sm:h-[500px] md:h-[530px] md:max-w-[370px] lg:h-[540px] lg:max-w-[390px] rounded-3xl p-2.5 glass-panel group transition-shadow duration-500 hover:shadow-[0_0_50px_rgba(0,245,212,0.3)] border border-slate-700/60"
       >
         {/* Holographic Glowing Border Accent */}
         <div className="absolute -inset-[1.5px] rounded-3xl bg-gradient-to-tr from-cyber-cyan/50 via-electric-indigo/50 to-neon-purple/50 opacity-40 blur-sm group-hover:opacity-80 transition-opacity duration-700 pointer-events-none" />
@@ -118,13 +133,13 @@ export default function PortraitCard() {
           />
 
           {/* Top Bar HUD Tech Overlays */}
-          <div className="absolute top-3.5 left-3.5 right-3.5 flex items-center justify-between z-20" style={{ transform: 'translateZ(25px)' }}>
-            <div className="flex items-center gap-1.5 rounded-full bg-void/85 px-3 py-1 backdrop-blur-md border border-white/10 text-[10px] font-mono text-cyber-cyan">
+          <div className="absolute top-3 left-3 right-3 flex items-center justify-between z-20" style={{ transform: 'translateZ(25px)' }}>
+            <div className="flex items-center gap-1.5 rounded-full bg-void/90 px-2.5 py-1 backdrop-blur-md border border-white/10 text-[10px] font-mono text-cyber-cyan">
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyber-cyan opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-cyber-cyan"></span>
               </span>
-              <span>{mediaMode === 'video' ? 'LIVE_ENTRANCE_REEL' : 'DEV_NODE::ACTIVE'}</span>
+              <span>{mediaMode === 'video' ? 'LIVE_ENTRANCE' : 'DEV_NODE::ACTIVE'}</span>
             </div>
 
             {/* Media Mode Switcher & Replay Button */}
@@ -133,25 +148,25 @@ export default function PortraitCard() {
                 <button
                   onClick={handleReplayVideo}
                   title="Replay Entrance Walk"
-                  className="flex h-6 w-6 items-center justify-center rounded-full bg-void/85 text-cyber-cyan border border-white/10 hover:bg-cyber-cyan hover:text-black transition-colors"
+                  className="flex h-7 w-7 items-center justify-center rounded-full bg-void/90 text-cyber-cyan border border-white/10 hover:bg-cyber-cyan hover:text-black transition-colors"
                 >
-                  <RotateCcw className="h-2.5 w-2.5" />
+                  <RotateCcw className="h-3 w-3" />
                 </button>
               )}
 
               <button
                 onClick={toggleMediaMode}
                 title={mediaMode === 'video' ? 'Switch to Portrait Photo' : 'Switch to Walking Video'}
-                className="flex items-center gap-1 rounded-full bg-void/85 px-2.5 py-0.5 text-[9px] font-mono text-slate-300 border border-white/10 hover:border-cyber-cyan hover:text-white transition-colors"
+                className="flex items-center gap-1 rounded-full bg-void/90 px-2.5 py-1 text-[10px] font-mono text-slate-300 border border-white/10 hover:border-cyber-cyan hover:text-white transition-colors"
               >
                 {mediaMode === 'video' ? (
                   <>
-                    <ImageIcon className="h-2.5 w-2.5 text-cyber-cyan" />
+                    <ImageIcon className="h-3 w-3 text-cyber-cyan" />
                     <span>STILL</span>
                   </>
                 ) : (
                   <>
-                    <Video className="h-2.5 w-2.5 text-cyber-cyan" />
+                    <Video className="h-3 w-3 text-cyber-cyan" />
                     <span>WALK</span>
                   </>
                 )}
@@ -160,7 +175,7 @@ export default function PortraitCard() {
           </div>
 
           {/* HUD Coordinate Grid Lines */}
-          <div className="absolute top-[42%] left-3 flex flex-col gap-0.5 text-[8.5px] font-mono text-slate-400/90 pointer-events-none" style={{ transform: 'translateZ(15px)' }}>
+          <div className="absolute top-[38%] left-3 flex flex-col gap-0.5 text-[8px] sm:text-[8.5px] font-mono text-slate-400/90 pointer-events-none" style={{ transform: 'translateZ(15px)' }}>
             <span>LOC: MAGURA, BD</span>
             <span>UNI: LONDON (REMOTE)</span>
             <span className="text-cyber-cyan">CST ENGINEER (7TH SEM)</span>
@@ -168,16 +183,16 @@ export default function PortraitCard() {
 
           {/* Bottom Identity & Metrics Card Floating in 3D Space */}
           <div
-            className="absolute bottom-3 left-3 right-3 rounded-xl p-3 glass-panel border border-white/15 bg-void-card/90"
+            className="absolute bottom-2.5 left-2.5 right-2.5 rounded-xl p-3 glass-panel border border-white/15 bg-void-card/90"
             style={{ transform: 'translateZ(35px)' }}
           >
             <div className="flex items-center justify-between mb-1">
               <div>
-                <h3 className="font-display text-base font-bold tracking-tight text-white flex items-center gap-1">
+                <h3 className="font-display text-sm sm:text-base font-bold tracking-tight text-white flex items-center gap-1">
                   MD. ASHIK SIDDIKE
                   <Sparkles className="h-3.5 w-3.5 text-cyber-cyan animate-pulse" />
                 </h3>
-                <p className="text-[11px] text-slate-300 font-mono">Full-Stack Dev & UI/UX Designer</p>
+                <p className="text-[10px] sm:text-[11px] text-slate-300 font-mono">Full-Stack Dev & UI/UX Designer</p>
               </div>
 
               <div className="text-right">
@@ -187,7 +202,7 @@ export default function PortraitCard() {
             </div>
 
             {/* Micro skill tags */}
-            <div className="mt-2 flex flex-wrap gap-1 pt-1.5 border-t border-white/10 text-[9px] font-mono text-slate-300">
+            <div className="mt-1.5 flex flex-wrap gap-1 pt-1.5 border-t border-white/10 text-[9px] font-mono text-slate-300">
               <span className="px-1.5 py-0.5 rounded-md bg-white/5 border border-white/5">React / Next.js</span>
               <span className="px-1.5 py-0.5 rounded-md bg-white/5 border border-white/5">Node / Firebase</span>
               <span className="px-1.5 py-0.5 rounded-md bg-cyber-cyan/10 text-cyber-cyan border border-cyber-cyan/20">Figma UI/UX</span>

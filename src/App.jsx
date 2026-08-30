@@ -2,6 +2,7 @@ import React, { useState, useEffect, lazy, Suspense } from 'react';
 import Lenis from 'lenis';
 import Preloader from './components/layout/Preloader';
 import Navbar from './components/layout/Navbar';
+import MobileDock from './components/layout/MobileDock';
 import CustomCursor from './components/ui/CustomCursor';
 import Hero from './components/sections/Hero';
 
@@ -43,10 +44,10 @@ export default function App() {
 
   return (
     <div className="relative min-h-screen bg-void text-slate-100 overflow-x-hidden selection:bg-cyber-cyan selection:text-black">
-      {/* Zero-Rerender Hardware Accelerated Fluid Cursor */}
+      {/* Zero-Rerender Hardware Accelerated Fluid Cursor (Desktop) */}
       <CustomCursor />
 
-      {/* Developer CLI Bootloader */}
+      {/* Developer CLI Bootloader / 3D Intro */}
       {loading && (
         <Preloader
           onComplete={() => {
@@ -58,8 +59,11 @@ export default function App() {
       {/* Floating Glass Navigation */}
       <Navbar />
 
+      {/* Floating Thumb-Friendly Mobile Quick Action Dock */}
+      {!loading && <MobileDock />}
+
       {/* Main Content Sections */}
-      <main className="relative z-10">
+      <main className="relative z-10 pb-16 md:pb-0">
         <Hero />
         <Suspense fallback={<div className="py-20 text-center font-mono text-xs text-cyber-cyan">LOADING MODULE...</div>}>
           <Showreel />

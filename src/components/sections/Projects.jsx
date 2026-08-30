@@ -164,16 +164,16 @@ export default function Projects() {
             </h2>
           </div>
 
-          {/* Category Filter Pills */}
-          <div className="flex flex-wrap gap-2 p-1.5 glass-panel rounded-2xl sm:rounded-full border border-white/10">
+          {/* Category Filter Pills (Horizontal scrollable on mobile) */}
+          <div className="flex items-center gap-2 p-1.5 glass-panel rounded-2xl sm:rounded-full border border-white/10 overflow-x-auto no-scrollbar max-w-full">
             {categories.map((cat) => (
               <button
                 key={cat}
                 onClick={() => setActiveFilter(cat)}
-                className={`relative px-3.5 py-1.5 rounded-full font-mono text-xs transition-all duration-300 ${
+                className={`relative px-4 py-2 rounded-full font-mono text-xs whitespace-nowrap shrink-0 transition-all duration-300 ${
                   activeFilter === cat
                     ? 'text-black font-bold bg-cyber-cyan shadow-[0_0_15px_rgba(0,245,212,0.5)]'
-                    : 'text-slate-400 hover:text-white'
+                    : 'text-slate-400 hover:text-white hover:bg-white/5'
                 }`}
                 data-cursor="pointer"
               >

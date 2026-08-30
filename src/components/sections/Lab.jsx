@@ -132,9 +132,9 @@ export function GlassCard({ title, subtitle }) {
           </p>
         </div>
 
-        {/* Tab Switcher */}
-        <div className="flex justify-center mb-10">
-          <div className="inline-flex flex-wrap p-1.5 glass-panel rounded-2xl sm:rounded-full border border-white/10 gap-1">
+        {/* Tab Switcher (Mobile Swipeable) */}
+        <div className="flex justify-center mb-10 max-w-full overflow-hidden">
+          <div className="inline-flex items-center p-1.5 glass-panel rounded-2xl sm:rounded-full border border-white/10 gap-1 overflow-x-auto no-scrollbar max-w-full">
             {[
               { id: 'AI_ENGINE', label: 'INTERVUEAI SIMULATOR', icon: Bot },
               { id: 'COMPONENT_STUDIO', label: 'UI COMPONENT STUDIO', icon: Code2 },
@@ -143,7 +143,7 @@ export function GlassCard({ title, subtitle }) {
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                className={`flex items-center gap-2 px-5 py-2.5 rounded-full font-mono text-xs transition-all ${
+                className={`flex items-center gap-2 px-4 py-2.5 rounded-full font-mono text-xs whitespace-nowrap shrink-0 transition-all ${
                   activeTab === tab.id
                     ? 'bg-gradient-to-r from-cyber-cyan to-electric-indigo text-black font-bold shadow-[0_0_20px_rgba(0,245,212,0.4)]'
                     : 'text-slate-400 hover:text-white'

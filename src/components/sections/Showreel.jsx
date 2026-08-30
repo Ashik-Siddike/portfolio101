@@ -112,13 +112,13 @@ export default function Showreel() {
             </h2>
           </div>
 
-          {/* Tab Selector */}
-          <div className="flex flex-wrap gap-2 p-1.5 glass-panel rounded-full border border-white/10">
+          {/* Tab Selector (Horizontal scrollable on mobile) */}
+          <div className="flex items-center gap-2 p-1.5 glass-panel rounded-2xl sm:rounded-full border border-white/10 overflow-x-auto no-scrollbar max-w-full">
             {compositions.map((comp, idx) => (
               <button
                 key={comp.id}
                 onClick={() => handleTabChange(idx)}
-                className={`relative px-4 py-2 rounded-full font-mono text-xs transition-all duration-300 ${
+                className={`relative px-4 py-2 rounded-full font-mono text-xs whitespace-nowrap shrink-0 transition-all duration-300 ${
                   activeTab === idx
                     ? 'text-white font-bold'
                     : 'text-slate-400 hover:text-slate-200'

@@ -113,8 +113,8 @@ export default function Metrics() {
           </div>
         </div>
 
-        {/* Stats Grid with Staggered Reveal */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-20">
+        {/* Stats Grid (2x2 on mobile for clean symmetry) */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6 mb-16 sm:mb-20">
           {stats.map((stat, idx) => (
             <motion.div
               key={idx}
@@ -122,16 +122,16 @@ export default function Metrics() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.1 }}
               transition={{ duration: 0.6, delay: idx * 0.1, ease: [0.16, 1, 0.3, 1] }}
-              className="p-8 rounded-3xl glass-panel border border-white/10 glass-card-hover text-left flex flex-col justify-between"
+              className="p-4 sm:p-8 rounded-2xl sm:rounded-3xl glass-panel border border-white/10 glass-card-hover text-left flex flex-col justify-between"
             >
-              <div className="font-display font-black text-4xl sm:text-5xl text-transparent bg-clip-text bg-gradient-to-r from-cyber-cyan to-electric-indigo mb-3">
+              <div className="font-display font-black text-2xl sm:text-4xl lg:text-5xl text-transparent bg-clip-text bg-gradient-to-r from-cyber-cyan to-electric-indigo mb-2 sm:mb-3">
                 {stat.value}
               </div>
               <div>
-                <h4 className="font-mono text-xs font-bold text-white tracking-wider mb-1">
+                <h4 className="font-mono text-[10px] sm:text-xs font-bold text-white tracking-wider mb-0.5 sm:mb-1">
                   {stat.label}
                 </h4>
-                <p className="font-mono text-[11px] text-slate-400">
+                <p className="font-mono text-[9px] sm:text-[11px] text-slate-400">
                   {stat.sub}
                 </p>
               </div>

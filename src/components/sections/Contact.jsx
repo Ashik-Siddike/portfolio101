@@ -98,10 +98,10 @@ export default function Contact() {
         </div>
 
         {/* Contact Layout Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-stretch max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-stretch max-w-6xl mx-auto">
           
           {/* Left Column: Direct Channels & Verified Info */}
-          <div className="lg:col-span-5 flex flex-col justify-between p-8 sm:p-10 rounded-3xl glass-panel border border-white/15 space-y-8 bg-void-card/80 shadow-[0_20px_60px_rgba(0,0,0,0.8)]">
+          <div className="lg:col-span-5 flex flex-col justify-between p-5 sm:p-10 rounded-3xl glass-panel border border-white/15 space-y-6 sm:space-y-8 bg-void-card/80 shadow-[0_20px_60px_rgba(0,0,0,0.8)]">
             <div>
               <h3 className="font-display font-bold text-2xl text-white mb-2">
                 DIRECT CONTACT
@@ -207,7 +207,7 @@ export default function Contact() {
           </div>
 
           {/* Right Column: Project Inquiry Form */}
-          <div className="lg:col-span-7 p-8 sm:p-10 rounded-3xl glass-panel border border-white/15 bg-void-card/80 shadow-[0_20px_60px_rgba(0,0,0,0.8)]">
+          <div className="lg:col-span-7 p-5 sm:p-10 rounded-3xl glass-panel border border-white/15 bg-void-card/80 shadow-[0_20px_60px_rgba(0,0,0,0.8)]">
             <AnimatePresence mode="wait">
               {!formSubmitted ? (
                 <motion.form
