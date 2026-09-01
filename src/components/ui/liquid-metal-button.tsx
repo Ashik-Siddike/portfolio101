@@ -1,154 +1,30 @@
-import { liquidMetalFragmentShader, ShaderMount } from "@paper-design/shaders";
-import { Sparkles } from "lucide-react";
-import type React from "react";
-import { useEffect, useMemo, useRef, useState } from "react";
+import React, { useState, useRef, useMemo } from 'react';
+import { Sparkles } from 'lucide-react';
 
 export interface LiquidMetalButtonProps {
   label?: string;
   onClick?: () => void;
-  viewMode?: "text" | "icon";
+  viewMode?: 'text' | 'icon';
   className?: string;
   icon?: React.ReactNode;
 }
 
 export function LiquidMetalButton({
-  label = "Get Started",
+  label = 'Get Started',
   onClick,
-  viewMode = "text",
-  className = "",
+  viewMode = 'text',
+  className = '',
   icon,
 }: LiquidMetalButtonProps) {
   const [isHovered, setIsHovered] = useState(false);
   const [isPressed, setIsPressed] = useState(false);
-  const [ripples, setRipples] = useState<
-    Array<{ x: number; y: number; id: number }>
-  >([]);
-  const shaderRef = useRef<HTMLDivElement>(null);
-  // biome-ignore lint/suspicious/noExplicitAny: External library without types
-  const shaderMount = useRef<any>(null);
+  const [ripples, setRipples] = useState<Array<{ x: number; y: number; id: number }>>([]);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const rippleId = useRef(0);
 
-  const isIconOnly = viewMode === "icon" && !label;
-
-  const dimensions = useMemo(() => {
-    if (isIconOnly) {
-      return {
-        width: 48,
-        height: 48,
-        innerWidth: 44,
-        innerHeight: 44,
-        shaderWidth: 48,
-        shaderHeight: 48,
-      };
-    } else {
-      // Dynamic width calculation based on label length
-      const baseWidth = Math.max(160, Math.min(260, label.length * 10 + 60));
-      return {
-        width: baseWidth,
-        height: 48,
-        innerWidth: baseWidth - 4,
-        innerHeight: 44,
-        shaderWidth: baseWidth,
-        shaderHeight: 48,
-      };
-    }
-  }, [isIconOnly, label]);
-
-  useEffect(() => {
-    const styleId = "shader-canvas-style-exploded";
-    if (!document.getElementById(styleId)) {
-      const style = document.createElement("style");
-      style.id = styleId;
-      style.textContent = `
-        .shader-container-exploded canvas {
-          width: 100% !important;
-          height: 100% !important;
-          display: block !important;
-          position: absolute !important;
-          top: 0 !important;
-          left: 0 !important;
-          border-radius: 100px !important;
-        }
-        @keyframes ripple-animation {
-          0% {
-            transform: translate(-50%, -50%) scale(0);
-            opacity: 0.6;
-          }
-          100% {
-            transform: translate(-50%, -50%) scale(4);
-            opacity: 0;
-          }
-        }
-      `;
-      document.head.appendChild(style);
-    }
-
-    const loadShader = async () => {
-      try {
-        if (shaderRef.current) {
-          if (shaderMount.current?.destroy) {
-            shaderMount.current.destroy();
-          }
-
-          shaderMount.current = new ShaderMount(
-            shaderRef.current,
-            liquidMetalFragmentShader,
-            {
-              u_repetition: 4,
-              u_softness: 0.5,
-              u_shiftRed: 0.3,
-              u_shiftBlue: 0.3,
-              u_distortion: 0,
-              u_contour: 0,
-              u_angle: 45,
-              u_scale: 8,
-              u_shape: 1,
-              u_offsetX: 0.1,
-              u_offsetY: -0.1,
-            },
-            undefined,
-            0.6,
-          );
-        }
-      } catch (error) {
-        console.error("[LiquidMetalButton] Failed to load shader:", error);
-      }
-    };
-
-    loadShader();
-
-    return () => {
-      if (shaderMount.current?.destroy) {
-        shaderMount.current.destroy();
-        shaderMount.current = null;
-      }
-    };
-  }, []);
-
-  const handleMouseEnter = () => {
-    setIsHovered(true);
-    shaderMount.current?.setSpeed?.(1);
-  };
-
-  const handleMouseLeave = () => {
-    setIsHovered(false);
-    setIsPressed(false);
-    shaderMount.current?.setSpeed?.(0.6);
-  };
+  const isIconOnly = viewMode === 'icon' && !label;
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    if (shaderMount.current?.setSpeed) {
-      shaderMount.current.setSpeed(2.4);
-      setTimeout(() => {
-        if (isHovered) {
-          shaderMount.current?.setSpeed?.(1);
-        } else {
-          shaderMount.current?.setSpeed?.(0.6);
-        }
-      }, 300);
-    }
-
     if (buttonRef.current) {
       const rect = buttonRef.current.getBoundingClientRect();
       const x = e.clientX - rect.left;
@@ -165,199 +41,86 @@ export function LiquidMetalButton({
   };
 
   return (
-    <div className={`relative inline-block ${className}`}>
+    <div className={`relative inline-flex items-center justify-center select-none ${className}`}>
+      {/* Outer Metallic Glow & Border */}
       <div
+        className="group relative rounded-full p-[1.5px] transition-all duration-500"
         style={{
-          perspective: "1000px",
-          perspectiveOrigin: "50% 50%",
+          background: isHovered
+            ? 'linear-gradient(135deg, #00f5d4 0%, #6366f1 50%, #d946ef 100%)'
+            : 'linear-gradient(135deg, rgba(0, 245, 212, 0.6) 0%, rgba(99, 102, 241, 0.4) 50%, rgba(255, 255, 255, 0.2) 100%)',
+          boxShadow: isHovered
+            ? '0 0 30px rgba(0, 245, 212, 0.4), 0 0 15px rgba(99, 102, 241, 0.3)'
+            : '0 0 15px rgba(0, 0, 0, 0.5)',
+          transform: isPressed ? 'scale(0.97)' : isHovered ? 'scale(1.03)' : 'scale(1)',
         }}
       >
+        {/* Animated Liquid Chrome Shimmer Layer */}
         <div
+          className="absolute inset-0 rounded-full opacity-75 blur-[2px] transition-opacity duration-500 group-hover:opacity-100 pointer-events-none"
           style={{
-            position: "relative",
-            width: `${dimensions.width}px`,
-            height: `${dimensions.height}px`,
-            transformStyle: "preserve-3d",
-            transition:
-              "all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1), width 0.4s ease, height 0.4s ease",
-            transform: isHovered ? "scale(1.04)" : "none",
+            background: 'linear-gradient(90deg, transparent 0%, rgba(0, 245, 212, 0.3) 50%, transparent 100%)',
+            backgroundSize: '200% 100%',
+            animation: 'liquidShimmer 3s linear infinite',
           }}
-        >
-          {/* Label & Icon Content */}
-          <div
-            style={{
-              position: "absolute",
-              top: 0,
-              left: 0,
-              width: `${dimensions.width}px`,
-              height: `${dimensions.height}px`,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              gap: "8px",
-              transformStyle: "preserve-3d",
-              transition:
-                "all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1), width 0.4s ease, height 0.4s ease, gap 0.4s ease",
-              transform: "translateZ(20px)",
-              zIndex: 30,
-              pointerEvents: "none",
-            }}
-          >
-            {icon || (viewMode === "icon" && !label && (
-              <Sparkles
-                size={16}
-                style={{
-                  color: "#00f5d4",
-                  filter: "drop-shadow(0px 1px 3px rgba(0, 245, 212, 0.5))",
-                  transition: "all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1)",
-                  transform: "scale(1)",
-                }}
-              />
-            ))}
-            {label && (
-              <span
-                style={{
-                  fontSize: "13px",
-                  color: "#ffffff",
-                  fontFamily: "monospace",
-                  fontWeight: 700,
-                  letterSpacing: "0.08em",
-                  textShadow: "0px 1px 4px rgba(0, 0, 0, 0.8)",
-                  transition: "all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1)",
-                  transform: "scale(1)",
-                  whiteSpace: "nowrap",
-                }}
-              >
-                {label}
-              </span>
-            )}
-          </div>
+        />
 
-          {/* Inner Button Body */}
-          <div
-            style={{
-              position: "absolute",
-              top: 0,
-              left: 0,
-              width: `${dimensions.width}px`,
-              height: `${dimensions.height}px`,
-              transformStyle: "preserve-3d",
-              transition:
-                "all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1), width 0.4s ease, height 0.4s ease",
-              transform: `translateZ(10px) ${isPressed ? "translateY(1px) scale(0.98)" : "translateY(0) scale(1)"}`,
-              zIndex: 20,
-            }}
-          >
-            <div
+        {/* Inner Button Body with Fluid Chrome Gradient */}
+        <button
+          ref={buttonRef}
+          onClick={handleClick}
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => {
+            setIsHovered(false);
+            setIsPressed(false);
+          }}
+          onMouseDown={() => setIsPressed(true)}
+          onMouseUp={() => setIsPressed(false)}
+          className={`relative flex items-center justify-center gap-2 rounded-full font-mono text-xs font-bold tracking-wider transition-all duration-300 overflow-hidden ${
+            isIconOnly ? 'h-10 w-10 p-0' : 'px-5 py-2.5 sm:px-6 sm:py-3'
+          }`}
+          style={{
+            background: isHovered
+              ? 'linear-gradient(180deg, #181b2a 0%, #0a0b14 100%)'
+              : 'linear-gradient(180deg, #121422 0%, #06070d 100%)',
+            color: '#ffffff',
+          }}
+          data-cursor="pointer"
+          aria-label={label}
+        >
+          {/* Subtle Top Metallic Highlight */}
+          <div className="absolute top-0 left-2 right-2 h-[1px] bg-gradient-to-r from-transparent via-white/40 to-transparent pointer-events-none" />
+
+          {/* Icon */}
+          {icon || (isIconOnly && (
+            <Sparkles className="h-4 w-4 text-cyber-cyan transition-transform duration-300 group-hover:rotate-12 group-hover:scale-110" />
+          ))}
+
+          {/* Label */}
+          {!isIconOnly && (
+            <span className="relative z-10 text-white font-mono text-xs sm:text-sm font-bold tracking-wider uppercase transition-colors duration-300 group-hover:text-cyber-cyan">
+              {label}
+            </span>
+          )}
+
+          {/* Interactive Click Ripples */}
+          {ripples.map((ripple) => (
+            <span
+              key={ripple.id}
               style={{
-                width: `${dimensions.innerWidth}px`,
-                height: `${dimensions.innerHeight}px`,
-                margin: "2px",
-                borderRadius: "100px",
-                background: "linear-gradient(180deg, rgba(30, 32, 45, 0.9) 0%, rgba(5, 6, 12, 0.95) 100%)",
-                boxShadow: isPressed
-                  ? "inset 0px 2px 4px rgba(0, 0, 0, 0.6), inset 0px 1px 2px rgba(0, 0, 0, 0.5)"
-                  : "0 0 15px rgba(0, 245, 212, 0.2)",
-                transition:
-                  "all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1), width 0.4s ease, height 0.4s ease, box-shadow 0.15s cubic-bezier(0.4, 0, 0.2, 1)",
+                position: 'absolute',
+                left: `${ripple.x}px`,
+                top: `${ripple.y}px`,
+                width: '20px',
+                height: '20px',
+                borderRadius: '50%',
+                background: 'radial-gradient(circle, rgba(0, 245, 212, 0.6) 0%, rgba(99, 102, 241, 0) 70%)',
+                pointerEvents: 'none',
+                animation: 'ripple-animation 0.6s ease-out',
               }}
             />
-          </div>
-
-          {/* Outer Shader Border Container */}
-          <div
-            style={{
-              position: "absolute",
-              top: 0,
-              left: 0,
-              width: `${dimensions.width}px`,
-              height: `${dimensions.height}px`,
-              transformStyle: "preserve-3d",
-              transition:
-                "all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1), width 0.4s ease, height 0.4s ease",
-              transform: `translateZ(0px) ${isPressed ? "translateY(1px) scale(0.98)" : "translateY(0) scale(1)"}`,
-              zIndex: 10,
-            }}
-          >
-            <div
-              style={{
-                height: `${dimensions.height}px`,
-                width: `${dimensions.width}px`,
-                borderRadius: "100px",
-                boxShadow: isPressed
-                  ? "0px 0px 0px 1px rgba(0, 245, 212, 0.5), 0px 1px 2px 0px rgba(0, 0, 0, 0.5)"
-                  : isHovered
-                    ? "0px 0px 0px 1px rgba(0, 245, 212, 0.6), 0px 12px 20px 0px rgba(0, 245, 212, 0.2), 0px 4px 10px 0px rgba(99, 102, 241, 0.3)"
-                    : "0px 0px 0px 1px rgba(255, 255, 255, 0.15), 0px 8px 16px 0px rgba(0, 0, 0, 0.4)",
-                transition:
-                  "all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1), width 0.4s ease, height 0.4s ease, box-shadow 0.15s cubic-bezier(0.4, 0, 0.2, 1)",
-                background: "transparent",
-              }}
-            >
-              <div
-                ref={shaderRef}
-                className="shader-container-exploded"
-                style={{
-                  borderRadius: "100px",
-                  overflow: "hidden",
-                  position: "relative",
-                  width: `${dimensions.shaderWidth}px`,
-                  maxWidth: `${dimensions.shaderWidth}px`,
-                  height: `${dimensions.shaderHeight}px`,
-                  transition: "width 0.4s ease, height 0.4s ease",
-                }}
-              />
-            </div>
-          </div>
-
-          {/* Trigger Button Layer */}
-          <button
-            ref={buttonRef}
-            onClick={handleClick}
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
-            onMouseDown={() => setIsPressed(true)}
-            onMouseUp={() => setIsPressed(false)}
-            style={{
-              position: "absolute",
-              top: 0,
-              left: 0,
-              width: `${dimensions.width}px`,
-              height: `${dimensions.height}px`,
-              background: "transparent",
-              border: "none",
-              cursor: "pointer",
-              outline: "none",
-              zIndex: 40,
-              transformStyle: "preserve-3d",
-              transform: "translateZ(25px)",
-              transition:
-                "all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1), width 0.4s ease, height 0.4s ease",
-              overflow: "hidden",
-              borderRadius: "100px",
-            }}
-            aria-label={label}
-            data-cursor="pointer"
-          >
-            {ripples.map((ripple) => (
-              <span
-                key={ripple.id}
-                style={{
-                  position: "absolute",
-                  left: `${ripple.x}px`,
-                  top: `${ripple.y}px`,
-                  width: "20px",
-                  height: "20px",
-                  borderRadius: "50%",
-                  background:
-                    "radial-gradient(circle, rgba(0, 245, 212, 0.5) 0%, rgba(99, 102, 241, 0) 70%)",
-                  pointerEvents: "none",
-                  animation: "ripple-animation 0.6s ease-out",
-                }}
-              />
-            ))}
-          </button>
-        </div>
+          ))}
+        </button>
       </div>
     </div>
   );

@@ -1,6 +1,5 @@
-import React, { useState, useEffect, lazy, Suspense } from 'react';
+import React, { useEffect, lazy, Suspense } from 'react';
 import Lenis from 'lenis';
-import Preloader from './components/layout/Preloader';
 import Navbar from './components/layout/Navbar';
 import MobileDock from './components/layout/MobileDock';
 import CustomCursor from './components/ui/CustomCursor';
@@ -16,12 +15,10 @@ const Metrics = lazy(() => import('./components/sections/Metrics'));
 const Contact = lazy(() => import('./components/sections/Contact'));
 
 export default function App() {
-  const [loading, setLoading] = useState(true);
-
   // Initialize smooth momentum scroll with Lenis (Optimized performance settings)
   useEffect(() => {
     const lenis = new Lenis({
-      duration: 1.0,
+      duration: 0.9,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: 'vertical',
       gestureOrientation: 'vertical',
@@ -44,27 +41,18 @@ export default function App() {
   }, []);
 
   return (
-    <div className="relative min-h-screen bg-void text-slate-100 overflow-x-hidden selection:bg-cyber-cyan selection:text-black">
+    <div className="relative min-h-screen bg-[#070812] text-slate-100 overflow-x-hidden selection:bg-cyber-cyan selection:text-black">
       {/* Zero-Rerender Hardware Accelerated Fluid Cursor (Desktop) */}
       <CustomCursor />
 
-      {/* Interactive Cyber Matrix Grid + Cursor Spotlight Background */}
+      {/* Interactive High-Contrast Cyber Matrix Grid + Cursor Spotlight Background */}
       <CyberGridBackground />
-
-      {/* Developer CLI Bootloader / 3D Intro */}
-      {loading && (
-        <Preloader
-          onComplete={() => {
-            setLoading(false);
-          }}
-        />
-      )}
 
       {/* Floating Glass Navigation */}
       <Navbar />
 
       {/* Floating Thumb-Friendly Mobile Quick Action Dock */}
-      {!loading && <MobileDock />}
+      <MobileDock />
 
       {/* Main Content Sections */}
       <main className="relative z-10 pb-16 md:pb-0">

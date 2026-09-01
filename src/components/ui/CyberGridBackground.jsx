@@ -20,9 +20,8 @@ export default function CyberGridBackground() {
     };
 
     const updatePosition = () => {
-      // Smooth interpolation for fluid cinematic movement
-      currentX += (targetX - currentX) * 0.15;
-      currentY += (targetY - currentY) * 0.15;
+      currentX += (targetX - currentX) * 0.12;
+      currentY += (targetY - currentY) * 0.12;
 
       el.style.setProperty('--spotlight-x', `${currentX}px`);
       el.style.setProperty('--spotlight-y', `${currentY}px`);
@@ -42,71 +41,97 @@ export default function CyberGridBackground() {
   return (
     <div
       ref={containerRef}
-      className="fixed inset-0 pointer-events-none z-0 overflow-hidden bg-void select-none"
+      className="fixed inset-0 pointer-events-none z-0 overflow-hidden bg-[#070812] select-none"
       style={{
         '--spotlight-x': '50vw',
         '--spotlight-y': '30vh',
       }}
     >
-      {/* 1. Base Subtle Cyber Grid (Always visible with soft contrast) */}
+      {/* 1. Base Cyber Grid Lines (Crisp and clearly visible throughout the page) */}
       <div 
-        className="absolute inset-0 opacity-[0.18]"
+        className="absolute inset-0 opacity-40"
         style={{
           backgroundImage: `
-            linear-gradient(to right, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
-            linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 1px, transparent 1px)
+            linear-gradient(to right, rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(255, 255, 255, 0.08) 1px, transparent 1px)
           `,
-          backgroundSize: '48px 48px',
+          backgroundSize: '40px 40px',
         }}
       />
 
-      {/* 2. Interactive Spotlight Gradient Halo (Follows Cursor) */}
+      {/* 2. Secondary Isometric Diagonal Grid for High-Tech Depth */}
+      <div 
+        className="absolute inset-0 opacity-15"
+        style={{
+          backgroundImage: `
+            radial-gradient(circle 1px at 1px 1px, rgba(0, 245, 212, 0.8) 100%, transparent 0)
+          `,
+          backgroundSize: '40px 40px',
+        }}
+      />
+
+      {/* 3. High-Intensity Cursor Spotlight Torchlight */}
       <div
-        className="absolute inset-0 transition-opacity duration-500"
+        className="absolute inset-0"
         style={{
           background: `
-            radial-gradient(700px circle at var(--spotlight-x) var(--spotlight-y), 
-              rgba(0, 245, 212, 0.14) 0%, 
-              rgba(99, 102, 241, 0.10) 35%, 
-              rgba(217, 70, 239, 0.04) 60%, 
+            radial-gradient(650px circle at var(--spotlight-x) var(--spotlight-y), 
+              rgba(0, 245, 212, 0.22) 0%, 
+              rgba(99, 102, 241, 0.16) 40%, 
+              rgba(217, 70, 239, 0.06) 65%, 
               transparent 75%
             )
           `,
         }}
       />
 
-      {/* 3. Illuminated Glowing Cyber Matrix Grid (Revealed by Cursor Spotlight) */}
+      {/* 4. Illuminated Glowing Cyber Matrix Grid (Bright Cyan/Indigo lines revealed by Cursor) */}
       <div
         className="absolute inset-0"
         style={{
           backgroundImage: `
-            linear-gradient(to right, rgba(0, 245, 212, 0.5) 1px, transparent 1px),
-            linear-gradient(to bottom, rgba(99, 102, 241, 0.5) 1px, transparent 1px)
+            linear-gradient(to right, rgba(0, 245, 212, 0.85) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(99, 102, 241, 0.85) 1px, transparent 1px)
           `,
-          backgroundSize: '48px 48px',
-          maskImage: `radial-gradient(420px circle at var(--spotlight-x) var(--spotlight-y), black 0%, transparent 100%)`,
-          WebkitMaskImage: `radial-gradient(420px circle at var(--spotlight-x) var(--spotlight-y), black 0%, transparent 100%)`,
+          backgroundSize: '40px 40px',
+          maskImage: `radial-gradient(450px circle at var(--spotlight-x) var(--spotlight-y), black 10%, transparent 100%)`,
+          WebkitMaskImage: `radial-gradient(450px circle at var(--spotlight-x) var(--spotlight-y), black 10%, transparent 100%)`,
         }}
       />
 
-      {/* 4. Glowing Intersection Crosshair Dots (Matrix Tech Points) */}
+      {/* 5. Glowing Intersection Crosshair Points (+) */}
       <div
         className="absolute inset-0"
         style={{
-          backgroundImage: `radial-gradient(circle 1.5px at 1px 1px, rgba(0, 245, 212, 0.9) 100%, transparent 0)`,
-          backgroundSize: '48px 48px',
-          maskImage: `radial-gradient(350px circle at var(--spotlight-x) var(--spotlight-y), black 0%, transparent 100%)`,
-          WebkitMaskImage: `radial-gradient(350px circle at var(--spotlight-x) var(--spotlight-y), black 0%, transparent 100%)`,
+          backgroundImage: `
+            radial-gradient(circle 2px at 1px 1px, rgba(0, 245, 212, 1) 100%, transparent 0)
+          `,
+          backgroundSize: '40px 40px',
+          maskImage: `radial-gradient(400px circle at var(--spotlight-x) var(--spotlight-y), black 20%, transparent 100%)`,
+          WebkitMaskImage: `radial-gradient(400px circle at var(--spotlight-x) var(--spotlight-y), black 20%, transparent 100%)`,
         }}
       />
 
-      {/* 5. Ambient Atmospheric Depth Glow (Subtle Breathing Orbs for Mobile & Idle) */}
-      <div className="absolute -top-40 left-1/4 h-[550px] w-[550px] rounded-full bg-cyber-cyan/10 blur-[140px] animate-pulse" style={{ animationDuration: '8s' }} />
-      <div className="absolute top-1/2 -right-32 h-[600px] w-[600px] rounded-full bg-electric-indigo/10 blur-[160px] animate-pulse" style={{ animationDuration: '12s', animationDelay: '2s' }} />
-      <div className="absolute -bottom-40 left-1/3 h-[500px] w-[500px] rounded-full bg-neon-purple/8 blur-[150px] animate-pulse" style={{ animationDuration: '10s', animationDelay: '4s' }} />
+      {/* 6. Slow Floating Ambient Aurora Orbs for Rich Colors & Depth */}
+      <div 
+        className="absolute -top-32 left-1/4 h-[500px] w-[500px] rounded-full bg-cyber-cyan/15 blur-[120px] animate-pulse" 
+        style={{ animationDuration: '6s' }} 
+      />
+      <div 
+        className="absolute top-1/3 -right-20 h-[550px] w-[550px] rounded-full bg-electric-indigo/15 blur-[140px] animate-pulse" 
+        style={{ animationDuration: '9s', animationDelay: '2s' }} 
+      />
+      <div 
+        className="absolute bottom-1/4 -left-20 h-[500px] w-[500px] rounded-full bg-neon-purple/12 blur-[130px] animate-pulse" 
+        style={{ animationDuration: '8s', animationDelay: '4s' }} 
+      />
+      <div 
+        className="absolute -bottom-32 right-1/4 h-[500px] w-[500px] rounded-full bg-cyber-cyan/12 blur-[120px] animate-pulse" 
+        style={{ animationDuration: '7s', animationDelay: '1s' }} 
+      />
 
-      {/* 6. Cinematic Vignette (Darkens edges to focus attention on central content) */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(5,6,12,0.7)_100%)] pointer-events-none" />
+      {/* 7. Subtle Corner Vignette */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_30%,rgba(7,8,18,0.6)_100%)] pointer-events-none" />
     </div>
   );
 }

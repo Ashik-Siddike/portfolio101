@@ -88,7 +88,7 @@ export default function Showreel() {
   };
 
   return (
-    <section ref={containerRef} id="showreel" className="relative py-28 px-4 sm:px-6 lg:px-8 bg-void border-t border-white/5 overflow-hidden">
+    <section ref={containerRef} id="showreel" className="relative py-28 px-4 sm:px-6 lg:px-8 bg-transparent border-t border-white/5 overflow-hidden">
       {/* Background ambient lighting pulse */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[500px] w-[800px] rounded-full bg-electric-indigo/10 blur-[160px] pointer-events-none" />
 

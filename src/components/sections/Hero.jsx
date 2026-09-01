@@ -35,7 +35,7 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative min-h-screen w-full flex flex-col justify-between pt-20 sm:pt-24 pb-6 overflow-hidden bg-void"
+      className="relative min-h-screen w-full flex flex-col justify-between pt-20 sm:pt-24 pb-6 overflow-hidden bg-transparent"
     >
       {/* 3D WebGL Three.js Particle and Geometry Canvas */}
       <HeroScene />
