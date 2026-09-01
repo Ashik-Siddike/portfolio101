@@ -3,6 +3,7 @@ import Lenis from 'lenis';
 import Preloader from './components/layout/Preloader';
 import Navbar from './components/layout/Navbar';
 import MobileDock from './components/layout/MobileDock';
+import AmbientAurora from './components/layout/AmbientAurora';
 import CustomCursor from './components/ui/CustomCursor';
 import Hero from './components/sections/Hero';
 
@@ -46,6 +47,9 @@ export default function App() {
     <div className="relative min-h-screen bg-void text-slate-100 overflow-x-hidden selection:bg-cyber-cyan selection:text-black">
       {/* Zero-Rerender Hardware Accelerated Fluid Cursor (Desktop) */}
       <CustomCursor />
+
+      {/* Living Ambient Aurora Breathing Mesh Gradient Background */}
+      <AmbientAurora />
 
       {/* Developer CLI Bootloader / 3D Intro */}
       {loading && (
