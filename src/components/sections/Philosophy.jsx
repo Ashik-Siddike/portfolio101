@@ -52,7 +52,7 @@ export default function Philosophy() {
   const currentSkill = skills[activeSkill];
 
   return (
-    <section id="philosophy" className="relative py-28 px-4 sm:px-6 lg:px-8 bg-transparent overflow-hidden">
+    <section id="philosophy" className="relative py-28 px-4 sm:px-6 lg:px-8 bg-void overflow-hidden">
       <div className="mx-auto max-w-7xl">
         
         {/* Section Header */}

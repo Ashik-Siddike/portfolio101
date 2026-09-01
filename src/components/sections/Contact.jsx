@@ -65,7 +65,7 @@ export default function Contact() {
   const services = ['Full-Stack Web App', 'UI/UX & Branding', 'AI SaaS Integration', 'Frontend / Next.js'];
 
   return (
-    <section id="contact" className="relative py-28 px-4 sm:px-6 lg:px-8 bg-transparent overflow-hidden border-t border-white/5">
+    <section id="contact" className="relative py-28 px-4 sm:px-6 lg:px-8 bg-void overflow-hidden border-t border-white/5">
       
       {/* Lightweight GPU-Accelerated Cyber Vortex Background (Zero WebGL overhead) */}
       <div className="absolute inset-0 pointer-events-none opacity-30 flex items-center justify-center overflow-hidden">

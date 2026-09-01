@@ -3,8 +3,8 @@ import Lenis from 'lenis';
 import Preloader from './components/layout/Preloader';
 import Navbar from './components/layout/Navbar';
 import MobileDock from './components/layout/MobileDock';
-import AmbientAurora from './components/layout/AmbientAurora';
 import CustomCursor from './components/ui/CustomCursor';
+import CyberGridBackground from './components/ui/CyberGridBackground';
 import Hero from './components/sections/Hero';
 
 // Code-split below-the-fold heavy sections for instant initial loading on Vercel
@@ -48,8 +48,8 @@ export default function App() {
       {/* Zero-Rerender Hardware Accelerated Fluid Cursor (Desktop) */}
       <CustomCursor />
 
-      {/* Living Ambient Aurora Breathing Mesh Gradient Background */}
-      <AmbientAurora />
+      {/* Interactive Cyber Matrix Grid + Cursor Spotlight Background */}
+      <CyberGridBackground />
 
       {/* Developer CLI Bootloader / 3D Intro */}
       {loading && (

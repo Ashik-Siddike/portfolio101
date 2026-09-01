@@ -106,7 +106,7 @@ export function GlassCard({ title, subtitle }) {
   };
 
   return (
-    <section id="lab" className="relative py-28 px-4 sm:px-6 lg:px-8 bg-transparent border-t border-white/5 overflow-hidden">
+    <section id="lab" className="relative py-28 px-4 sm:px-6 lg:px-8 bg-void border-t border-white/5 overflow-hidden">
       
       {/* Background radial glow */}
       <div className="absolute top-1/3 right-1/4 h-96 w-96 rounded-full bg-neon-purple/10 blur-[150px] pointer-events-none" />

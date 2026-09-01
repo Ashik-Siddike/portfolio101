@@ -148,7 +148,7 @@ export default function Projects() {
   };
 
   return (
-    <section id="works" className="relative py-28 px-4 sm:px-6 lg:px-8 bg-transparent overflow-hidden">
+    <section id="works" className="relative py-28 px-4 sm:px-6 lg:px-8 bg-void overflow-hidden">
       <div className="mx-auto max-w-7xl">
         
         {/* Section Header */}

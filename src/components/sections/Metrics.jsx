@@ -77,7 +77,7 @@ export default function Metrics() {
   ];
 
   return (
-    <section id="metrics" className="relative py-28 px-4 sm:px-6 lg:px-8 bg-transparent border-t border-white/5 overflow-hidden">
+    <section id="metrics" className="relative py-28 px-4 sm:px-6 lg:px-8 bg-void border-t border-white/5 overflow-hidden">
       <div className="mx-auto max-w-7xl">
         
         {/* Section Header */}
