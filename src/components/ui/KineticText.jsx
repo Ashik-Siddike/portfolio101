@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
-// Word-by-word staggered kinetic title reveal (100% razor-sharp 2D text, zero blur, zero 3D distortion)
+// Word-by-word staggered kinetic title reveal (100% razor-sharp 2D text, zero blur, perfect alignment)
 export function KineticTitle({ text, className = '', delay = 0, gradient = false }) {
   const words = text.split(' ');
 
@@ -37,13 +37,13 @@ export function KineticTitle({ text, className = '', delay = 0, gradient = false
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.1 }}
-      className={`inline-block ${className}`}
+      className={`inline ${className}`}
     >
       {words.map((word, index) => (
         <motion.span
           key={index}
           variants={wordVariants}
-          className={`inline-block mr-[0.25em] ${
+          className={`inline-block ${index === words.length - 1 ? '' : 'mr-[0.25em]'} ${
             gradient
               ? 'text-transparent bg-clip-text bg-gradient-to-r from-cyber-cyan via-electric-indigo to-neon-purple'
               : ''
@@ -86,7 +86,7 @@ export function KineticSubtitle({ text, className = '', delay = 0 }) {
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.1 }}
-      className={`inline-block ${className}`}
+      className={`inline ${className}`}
     >
       {letters.map((char, index) => (
         <motion.span key={index} variants={letterVariants} className="inline-block">

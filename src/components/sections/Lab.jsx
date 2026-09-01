@@ -118,16 +118,16 @@ export function GlassCard({ title, subtitle }) {
       >
         
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div className="text-center max-w-4xl mx-auto mb-16 flex flex-col items-center">
           <div className="inline-flex items-center gap-2 font-mono text-xs text-cyber-cyan tracking-widest uppercase mb-3 px-3.5 py-1 rounded-full glass-panel border border-white/10">
             <Cpu className="h-3.5 w-3.5" />
             <KineticSubtitle text="// 04. INTERACTIVE TECH & AI SANDBOX" />
           </div>
-          <h2 className="font-display font-black text-3xl sm:text-5xl md:text-6xl tracking-tight text-white">
-            <KineticTitle text="LIVE SYSTEM" /> <br />
+          <h2 className="font-display font-black text-3xl sm:text-5xl md:text-6xl tracking-tight text-white text-center w-full leading-[1.1]">
+            <KineticTitle text="LIVE SYSTEM" /> <br className="hidden sm:inline" />
             <KineticTitle text="ENGINEERING & AI PLAYGROUND." delay={0.2} gradient={true} />
           </h2>
-          <p className="mt-4 text-slate-300 font-light text-base sm:text-lg">
+          <p className="mt-4 text-slate-300 font-light text-sm sm:text-base md:text-lg max-w-2xl mx-auto text-center leading-relaxed">
             Direct proof of technical execution. Test real-time AI resume evaluations, customize tokenized design systems, and explore production-grade system architectures.
           </p>
         </div>

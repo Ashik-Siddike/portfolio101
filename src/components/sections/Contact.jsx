@@ -83,16 +83,16 @@ export default function Contact() {
       >
         
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 font-mono text-xs text-cyber-cyan tracking-widest uppercase mb-4 px-4 py-1 rounded-full glass-panel border border-white/10">
+        <div className="text-center max-w-4xl mx-auto mb-16 flex flex-col items-center">
+          <div className="inline-flex items-center gap-2 font-mono text-xs text-cyber-cyan tracking-widest uppercase mb-4 px-4 py-1.5 rounded-full glass-panel border border-white/10">
             <Sparkles className="h-3.5 w-3.5" />
             <KineticSubtitle text="// 07. CONNECT & COLLABORATE" />
           </div>
-          <h2 className="font-display font-black text-4xl sm:text-6xl md:text-7xl tracking-tight text-white leading-tight">
-            <KineticTitle text="LET'S BUILD SOMETHING" /> <br />
+          <h2 className="font-display font-black text-3xl sm:text-5xl md:text-6xl lg:text-7xl tracking-tight text-white leading-[1.1] text-center w-full">
+            <KineticTitle text="LET'S BUILD SOMETHING" /> <br className="hidden sm:inline" />
             <KineticTitle text="EXTRAORDINARY TOGETHER." delay={0.2} gradient={true} />
           </h2>
-          <p className="mt-6 text-slate-300 font-light text-lg sm:text-xl max-w-2xl mx-auto">
+          <p className="mt-6 text-slate-300 font-light text-sm sm:text-base md:text-lg max-w-2xl mx-auto text-center leading-relaxed">
             Available for high-impact full-stack web development, AI SaaS architecture, and bespoke UI/UX & graphic design projects.
           </p>
         </div>
