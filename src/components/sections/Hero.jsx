@@ -6,6 +6,8 @@ import PortraitCard from '../ui/PortraitCard';
 import MagneticButton from '../ui/MagneticButton';
 import { KineticTitle, KineticSubtitle } from '../ui/KineticText';
 import { GithubIcon, LinkedinIcon } from '../ui/Icons';
+import DotBorderButton from '../ui/dot-border-button';
+import LiquidMetalButton from '../ui/liquid-metal-button';
 
 export default function Hero() {
   const marqueeItems = [
@@ -83,41 +85,43 @@ export default function Hero() {
             </p>
 
             {/* CTAs & Social Links */}
-            <div className="mt-6 flex flex-wrap items-center gap-3.5 sm:gap-4">
-              <MagneticButton
+            <div className="mt-6 flex flex-wrap items-center gap-3 sm:gap-4">
+              {/* Primary Dot Border CTA */}
+              <DotBorderButton
                 onClick={scrollToWorks}
-                className="group relative inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full bg-gradient-to-r from-cyber-cyan to-electric-indigo text-black font-display font-bold text-xs sm:text-sm tracking-wider shadow-[0_0_25px_rgba(0,245,212,0.4)] hover:scale-105"
-                cursorText="PROJECTS"
-              >
-                <span>EXPLORE HIGHLIGHTED WORKS</span>
-                <ArrowDownRight className="h-4 w-4 transition-transform group-hover:translate-x-1 group-hover:translate-y-1" />
-              </MagneticButton>
+                variant="cyan"
+                label="EXPLORE WORKS"
+                icon={<ArrowDownRight className="h-4 w-4 text-cyber-cyan" />}
+              />
+
+              {/* Liquid Metal Hire Me CTA */}
+              <LiquidMetalButton
+                label="LET'S TALK"
+                onClick={() => {
+                  const el = document.getElementById('contact');
+                  if (el) el.scrollIntoView({ behavior: 'smooth' });
+                }}
+              />
 
               {/* GitHub Button */}
-              <a
+              <DotBorderButton
                 href="https://github.com/Ashik-Siddike"
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-3.5 rounded-full glass-panel text-white font-mono text-xs tracking-wider hover:border-cyber-cyan/40 hover:text-cyber-cyan transition-colors"
-                data-cursor="view"
-                data-cursor-text="GITHUB"
-              >
-                <GithubIcon className="h-4 w-4" />
-                <span>GITHUB</span>
-              </a>
+                variant="white"
+                label="GITHUB"
+                icon={<GithubIcon className="h-3.5 w-3.5 text-slate-300" />}
+              />
 
               {/* LinkedIn Button */}
-              <a
+              <DotBorderButton
                 href="https://linkedin.com/in/ashik-siddike"
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-3.5 rounded-full glass-panel text-white font-mono text-xs tracking-wider hover:border-electric-indigo/40 hover:text-indigo-300 transition-colors"
-                data-cursor="view"
-                data-cursor-text="LINKEDIN"
-              >
-                <LinkedinIcon className="h-4 w-4" />
-                <span>LINKEDIN</span>
-              </a>
+                variant="indigo"
+                label="LINKEDIN"
+                icon={<LinkedinIcon className="h-3.5 w-3.5 text-indigo-400" />}
+              />
             </div>
 
             {/* Real-time stats ticker */}

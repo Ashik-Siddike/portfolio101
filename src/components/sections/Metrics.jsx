@@ -4,6 +4,7 @@ import { Trophy, Star, Quote, Award, Sparkles, Building2, CheckCircle, Graduatio
 import MagneticButton from '../ui/MagneticButton';
 import { GithubIcon } from '../ui/Icons';
 import { KineticTitle, KineticSubtitle } from '../ui/KineticText';
+import DotBorderButton from '../ui/dot-border-button';
 
 export default function Metrics() {
   const [showResumeModal, setShowResumeModal] = useState(false);
@@ -93,23 +94,21 @@ export default function Metrics() {
           </div>
 
           <div className="flex flex-wrap items-center gap-3">
-            <button
+            <DotBorderButton
               onClick={() => setShowResumeModal(true)}
-              className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-cyber-cyan/10 border border-cyber-cyan/40 text-cyber-cyan font-mono text-xs font-bold hover:bg-cyber-cyan hover:text-black transition-all shadow-[0_0_20px_rgba(0,245,212,0.2)]"
-            >
-              <FileText className="h-4 w-4" />
-              <span>VIEW FULL RESUME</span>
-            </button>
+              variant="cyan"
+              label="VIEW FULL RESUME"
+              icon={<FileText className="h-4 w-4 text-cyber-cyan" />}
+            />
 
-            <a
+            <DotBorderButton
               href="/resume.html"
               target="_blank"
               rel="noreferrer"
-              className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/10 border border-white/20 text-white font-mono text-xs font-bold hover:border-cyber-cyan hover:text-cyber-cyan transition-all"
-            >
-              <Printer className="h-4 w-4 text-cyber-cyan" />
-              <span>PRINT / PDF CV</span>
-            </a>
+              variant="white"
+              label="PRINT / PDF CV"
+              icon={<Printer className="h-4 w-4 text-slate-300" />}
+            />
           </div>
         </div>
 

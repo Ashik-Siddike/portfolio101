@@ -3,6 +3,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Terminal, Code2, Sparkles, Copy, Check, Sliders, Layers, Bot, Cpu, Database, Server, Globe, ArrowRight, Zap, CheckCircle2 } from 'lucide-react';
 import MagneticButton from '../ui/MagneticButton';
 import { KineticTitle, KineticSubtitle } from '../ui/KineticText';
+import DotBorderButton from '../ui/dot-border-button';
+import LiquidMetalButton from '../ui/liquid-metal-button';
 
 export default function Lab() {
   const [activeTab, setActiveTab] = useState('AI_ENGINE'); // 'AI_ENGINE', 'COMPONENT_STUDIO', 'SYSTEM_ARCH'
@@ -380,6 +382,25 @@ export function GlassCard({ title, subtitle }) {
                   </p>
                 </div>
 
+                {/* Live Futuristic Button Showcases */}
+                <div className="mt-6 p-4 rounded-2xl bg-white/5 border border-white/10">
+                  <div className="font-mono text-[11px] text-cyber-cyan font-bold uppercase tracking-wider mb-3">
+                    // SHADCN COMPONENT SYSTEM: DOT BORDER & LIQUID METAL SHADERS
+                  </div>
+                  <div className="flex flex-wrap items-center gap-4 justify-center sm:justify-start">
+                    <DotBorderButton
+                      variant={cardTheme === 'cyan' ? 'cyan' : cardTheme === 'indigo' ? 'indigo' : cardTheme === 'gold' ? 'gold' : 'cyan'}
+                      label="NEUFORM DOT BORDER"
+                    />
+                    <LiquidMetalButton
+                      label="LIQUID METAL"
+                    />
+                    <LiquidMetalButton
+                      viewMode="icon"
+                    />
+                  </div>
+                </div>
+
                 {/* Generated React Code Snippet */}
                 <div className="mt-6 rounded-2xl bg-black/60 p-4 border border-white/10 font-mono text-xs text-slate-300 overflow-x-auto">
                   <pre className="text-cyber-cyan">{generatedComponentCode}</pre>
@@ -389,13 +410,12 @@ export function GlassCard({ title, subtitle }) {
               {/* Copy Code Button */}
               <div className="mt-6 pt-4 border-t border-white/10 flex items-center justify-between">
                 <span className="font-mono text-xs text-slate-400">FRAMEWORK: TAILWIND CSS & REACT 19</span>
-                <button
+                <DotBorderButton
                   onClick={copyCodeToClipboard}
-                  className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-cyber-cyan text-black font-display font-bold text-xs hover:scale-105 transition-transform"
-                >
-                  {copiedCode ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
-                  <span>{copiedCode ? 'COPIED REACT CODE!' : 'COPY COMPONENT CODE'}</span>
-                </button>
+                  variant="cyan"
+                  label={copiedCode ? "COPIED CODE!" : "COPY REACT CODE"}
+                  icon={copiedCode ? <Check className="h-4 w-4 text-cyber-cyan" /> : <Copy className="h-4 w-4 text-cyber-cyan" />}
+                />
               </div>
             </div>
           </motion.div>

@@ -5,6 +5,7 @@ import confetti from 'canvas-confetti';
 import MagneticButton from '../ui/MagneticButton';
 import { GithubIcon, LinkedinIcon, WhatsAppIcon } from '../ui/Icons';
 import { KineticTitle, KineticSubtitle } from '../ui/KineticText';
+import DotBorderButton from '../ui/dot-border-button';
 
 export default function Contact() {
   const [copied, setCopied] = useState(false);
@@ -291,14 +292,15 @@ export default function Contact() {
                   </div>
 
                   {/* Submit Button */}
-                  <MagneticButton
-                    type="submit"
-                    className="w-full py-4 rounded-xl bg-gradient-to-r from-cyber-cyan via-electric-indigo to-neon-purple text-black font-display font-black text-sm tracking-wider shadow-[0_0_30px_rgba(0,245,212,0.4)] hover:scale-[1.02]"
-                    cursorText="SEND"
-                  >
-                    <span>SEND MESSAGE TO ASHIK</span>
-                    <Send className="h-4 w-4 ml-2" />
-                  </MagneticButton>
+                  <div className="pt-2">
+                    <DotBorderButton
+                      type="submit"
+                      variant="cyan"
+                      label="TRANSMIT MESSAGE TO ASHIK"
+                      className="w-full !flex justify-center"
+                      icon={<Send className="h-4 w-4 ml-2 text-cyber-cyan" />}
+                    />
+                  </div>
                 </motion.form>
               ) : (
                 <motion.div

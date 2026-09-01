@@ -3,6 +3,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Sparkles, Send, Layers, Film, Cpu, Award, Trophy, MessageSquare, FileText } from 'lucide-react';
 import MagneticButton from '../ui/MagneticButton';
 import { GithubIcon, WhatsAppIcon } from '../ui/Icons';
+import LiquidMetalButton from '../ui/liquid-metal-button';
+import DotBorderButton from '../ui/dot-border-button';
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -107,26 +109,23 @@ export default function Navbar() {
         {/* Right Actions */}
         <div className="flex items-center gap-2 sm:gap-3">
           {/* GitHub Direct Link */}
-          <a
+          <DotBorderButton
             href="https://github.com/Ashik-Siddike"
             target="_blank"
             rel="noreferrer"
-            className="flex items-center gap-1.5 rounded-full px-3 py-1.5 border border-white/10 bg-white/5 text-xs font-mono text-slate-300 hover:border-cyber-cyan/40 hover:text-white transition-all duration-300"
-            title="View GitHub"
-          >
-            <GithubIcon className="h-3.5 w-3.5 text-cyber-cyan" />
-            <span className="hidden sm:inline text-[10px] font-bold">GITHUB</span>
-          </a>
+            variant="white"
+            label="GITHUB"
+            className="hidden sm:inline-flex !p-1"
+            icon={<GithubIcon className="h-3 w-3 text-cyber-cyan" />}
+          />
 
-          {/* Magnetic CTA Desktop */}
-          <MagneticButton
-            onClick={(e) => scrollToSection(e, '#contact')}
-            className="hidden sm:inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-cyber-cyan to-electric-indigo px-4 py-1.5 text-xs font-display font-bold text-black shadow-[0_0_20px_rgba(0,245,212,0.35)] hover:scale-105"
-            cursorText="LET'S GO"
-          >
-            <span>HIRE ME</span>
-            <Send className="h-3 w-3" />
-          </MagneticButton>
+          {/* Liquid Metal Hire Me CTA */}
+          <div className="hidden sm:block">
+            <LiquidMetalButton
+              label="HIRE ME"
+              onClick={() => scrollToSection(null, '#contact')}
+            />
+          </div>
 
           {/* Mobile Menu Toggle */}
           <button
